@@ -1,0 +1,7 @@
+node_modules
+/bower_components/*
+/.idea/*
+/app/client/lib/*
+npm-debug.log
+/bin/app/*
+/app/client/styles/*.css

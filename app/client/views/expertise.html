@@ -1,0 +1,54 @@
+<div class="col-md-3">
+    <div class="block-menu">
+        <button ng-click="openModalWindow()" class="btn btn-lg btn-primary glyphicon glyphicon-plus">&nbsp;Додати експертизу</button>
+    </div>
+    <ul class="list-group" ng-if="expertise_list.length != 0">
+        <h2>Список експертиз:</h2>
+        <li class="list-group-item list-group-item-info list-expertise" ng-repeat="item in expertise_list" ng-click="show(item)">
+            {{item.name}}
+            <i ng-click="removeExpertise(item)" class="glyphicon glyphicon-remove remove-expertise"></i>
+            <i ng-click="editExpertise(item)" class="glyphicon glyphicon-pencil remove-expertise"></i>
+        </li>
+    </ul>
+</div>
+
+<div class="col-md-9">
+    <tabset ng-if="expertise.name">
+        <tab heading="Альтернативи">
+            <h2>Експертиза: {{expertise.name}}</h2>
+            <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+            <div class="form-group">
+                <label>Назва альтернативи
+                    <input ng-model="alternative.name" class="form-control" type="text"/>
+                </label>
+                <button ng-click="addAlternative(alternative.name, expertise.id)" class="btn btn-success">Додати</button>
+            </div>
+            <div class="criterions">
+                <ul><h2>Альтернативи:</h2>
+                    <li ng-repeat="item in alnernative_list">
+                        {{item.name}}
+                        <button ng-click="removeAlternative(item)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
+                    </li>
+                </ul>
+            </div>
+        </tab>
+        <tab heading="Критерії">
+            <h2>Експертиза: {{expertise.name}}</h2>
+            <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+            <div class="form-group">
+                <label>Назва критерію
+                    <input ng-model="criterion.name" class="form-control" type="text"/>
+                </label>
+                <button ng-click="addCriterion(criterion.name, expertise.id)" class="btn btn-success">Додати</button>
+            </div>
+            <div class="criterions">
+                <ul><h2>Критерії:</h2>
+                    <li ng-repeat="item in criterions">
+                        {{item.name}}
+                        <button ng-click="removeCriterion(item)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
+                    </li>
+                </ul>
+            </div>
+        </tab>
+    </tabset>
+</div>
