@@ -1,0 +1,6 @@
+.email_wrapper {
+    width: 70%;margin-top: 40px;text-align: center;
+}
+.email_content {
+    display: inline-block;max-width: 200px;border: 1px solid #46ba2f;background-color: rgba(66, 244, 96, 0.14);
+}
