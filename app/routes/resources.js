@@ -1,5 +1,10 @@
 module.exports = function (app) {
+  app.get ('/welcome', redirectRoot);
   app.get ('/api/methods', getMethods);
+
+  function redirectRoot(req, res) {
+    res.render('index.html');
+  }
 
   function getMethods(req, res) {
     var methods = [

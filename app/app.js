@@ -48,11 +48,6 @@ app.set('title', 'Expertise');
 //app.use(bodyParser({limit: global.commons.bodyParserSizeLimit}));
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.get ('/welcome', redirectRoot);
-
-function redirectRoot(req, res) {
-  res.render('index.html');
-}
 app.use(methodOverride());
 //app.use(flash());
 app.use(morgan(global.appConfig.logLevel));
