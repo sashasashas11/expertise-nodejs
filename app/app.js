@@ -1,6 +1,9 @@
 // check for necessary startup parameters:
 var enVars = process.env;
 
+enVars.EXPERTISE_PORT = enVars.EXPERTISE_PORT || '3000';
+enVars.EXPERTISE_ENV = enVars.EXPERTISE_ENV || 'development';
+
 if (undefined === (process.env.NODE_ENV = enVars.EXPERTISE_ENV)) throw 'Env var EXPERTISE_ENV is undefined';
 if (undefined === enVars.EXPERTISE_PORT) throw 'Env var EXPERTISE_PORT is undefined';
 
