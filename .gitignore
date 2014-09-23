@@ -4,4 +4,5 @@ node_modules
 /app/client/lib/*
 npm-debug.log
 /bin/app/*
-/app/client/styles/*.css
+/app/client/styles/header.css
+/app/client/styles/expertise.css

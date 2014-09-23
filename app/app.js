@@ -64,7 +64,7 @@ app.use(morgan(global.appConfig.logLevel));
 //var mailer = require('./libs/mailer')(app);
 
 // mount server routes:
-//require('./routes/resources')(app);
+require('./routes/resources')(app);
 //require('./routes/auth')(app, passport);
 
 
