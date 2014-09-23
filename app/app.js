@@ -16,7 +16,8 @@ var http        = require('http');
 var path        = require('path');
 var morgan      = require('morgan');      // log every request to the console
 
-//var passport    = require('passport');
+var passport    = require('passport');
+
 //var flash       = require('connect-flash');
 //var session     = require('express-session');
 var methodOverride = require('method-override'); // simulate DELETE and PUT
@@ -38,7 +39,8 @@ var db = mongoose.createConnection(global.appConfig.dbUri);
 global.dbConnection = db;
 mongoose.set('debug', true);
 
-//app.dbAccount = require('./schemas/accountSchema')(db);
+app.dbUser = require('./db/models/userModel')(db);
+app.dbMethod = require('./db/models/methodModel')(db);
 
 // configure Express web framework
 app.engine('html', require('ejs').renderFile);
@@ -56,7 +58,7 @@ app.use(morgan(global.appConfig.logLevel));
 //app.use(passport.session());
 
 // Configure passport (Enable users authentication:)
-//require('./passport.js')(app, passport);
+require('./passport.js')(app, passport);
 
 // Setup Mailer
 //var mailer = require('./libs/mailer')(app);
