@@ -21,8 +21,6 @@
         <div class="form-group">
             <input type="password" class="form-control" placeholder="Password" name="password" required ng-model="user.password">
         </div>
+        <button class="btn btn-lg btn-block" type="submit" ng-disabled="!form.$valid">Зареєструватися</button>
     </form>
-</div>
-<div class="modal-footer">
-    <button ng-click="signup(user, form)" class="btn btn-lg btn-block" type="submit">Зареєструватися</button>
 </div>
