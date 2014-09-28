@@ -1,0 +1,52 @@
+/* NOTIFICATIONS
+*****************************/
+.modal-content .notify-bar {
+    margin: auto auto;
+}
+.notify-bar {
+    padding: 12px 50px 3px;
+    margin: auto -32px;
+}
+.notify-bar span {
+    margin-left: 28px;
+    font-size: 17px;
+    line-height: 27px;
+}
+.notify-bar i {
+    position: absolute;
+    display: inline-block;
+    width: 19px;
+    height: 17px;
+    margin-right: 9px;
+}
+/* Errors */
+.notify-bar.error{
+    background-color: #fde0e0;
+}
+.notify-bar.error span {
+    /*color:#cf4c4c;*/
+    color: #D54B4B;
+}
+.notify-bar i.error-icon {
+    background: url('../images/notification/error_icon.png') 0 0 no-repeat;
+}
+/* Warnings */
+.notify-bar.warning {
+    background-color: #fff9e6;
+}
+.notify-bar.warning span {
+    color: #69654b;
+}
+.notify-bar i.warning-icon {
+    background: url('../images/notification/warning_icon.png') 0 0 no-repeat;
+}
+/* Success */
+.notify-bar.success{
+    background-color: #e8ffe9;
+}
+.notify-bar.success span {
+    color: rgba(47, 138, 36, 0.95);
+}
+.notify-bar i.success-icon {
+    background: url('../images/notification/success_icon.png') 0 0 no-repeat;
+}
