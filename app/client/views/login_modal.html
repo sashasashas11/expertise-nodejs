@@ -2,6 +2,8 @@
     <h3 class="modal-title">Вхід</h3>
 </div>
 <div class="modal-body">
+    <div ng-include data-src="'/views/shared/notify.html'"></div>
+
     <form name="form" ng-submit="login(user, form)" class="form-login {{notify.type}}" novalidate>
         <div class="form-group">
             <input type="email" class="form-control" placeholder="E-mail" name="username" required autofocus focus ng-model="user.username">
@@ -21,5 +23,5 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-lg btn-block automizely-btn" type="submit">Логін</button>
+    <button ng-click="login(user, form)" class="btn btn-lg btn-block" type="submit">Логін</button>
 </div>
