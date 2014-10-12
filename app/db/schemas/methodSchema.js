@@ -14,7 +14,7 @@ module.exports = function() {
       title: { type: String, required: true },
       text: { type: String, required: true },
       // Embedded `Method` schema used
-      children: [Object]
+      children: { type: Array, required: false }
     }
   );
 }

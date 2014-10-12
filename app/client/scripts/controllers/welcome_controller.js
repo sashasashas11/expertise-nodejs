@@ -8,7 +8,7 @@ angular.module('Expertise').
 		});
 
 		$scope.updateMethod = function(method) {
-			$http.put('/api/methods/'+ method.id, {text: method.text})
+			$http.put('/api/methods/'+ method.id, { text: method.text })
 		};
 
       $rootScope.loginModelOpen = function () {
@@ -25,7 +25,7 @@ angular.module('Expertise').
             $location.path("/");
           })
         }
-      }
+      };
 
       $rootScope.signupModelOpen = function () {
         var modalInstance = $modal.open({
