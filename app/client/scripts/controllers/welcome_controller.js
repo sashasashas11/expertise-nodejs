@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Expertise').
-	controller('welcomeController', function ($rootScope, $scope, $http, $modal) {
+	controller('welcomeController', function ($rootScope, $scope, $http, $modal, SignupModalCtrl, LoginModalCtrl) {
 		$scope.methods = [];
 		$http.get('/api/methods').success(function(res) {
       $scope.methods = res.methods;
@@ -11,35 +11,18 @@ angular.module('Expertise').
 			$http.put('/api/methods/'+ method.id, { text: method.text })
 		};
 
-      $rootScope.loginModelOpen = function () {
-          var modalInstance = $modal.open({
-            templateUrl: '../views/login_modal.html',
-            controller: loginModalCtrl
-          });
-      };
-
-      var loginModalCtrl = function($scope, $modalInstance, $http, $location) {
-        $scope.user = {};
-        $scope.login = function (user, form) {
-          $http.post('/login', user).success(function (res) {
-            $location.path("/");
-          })
-        }
-      };
-
-      $rootScope.signupModelOpen = function () {
+    $rootScope.loginModelOpen = function () {
         var modalInstance = $modal.open({
-          templateUrl: '../views/signup_modal.html',
-          controller: signupCtrl
+          templateUrl: '../views/login_modal.html',
+          controller: LoginModalCtrl
         });
-      };
+    };
 
-      var signupCtrl = function($scope, $modalInstance, $http, $location) {
-        $scope.user = {};
-        $scope.signup = function (user, form) {
-          $http.post('/signup', user).success(function (res) {
-            $location.path("/");
-          })
-        }
-      }
+    $rootScope.signupModelOpen = function () {
+      var modalInstance = $modal.open({
+        templateUrl: '../views/signup_modal.html',
+        controller: SignupModalCtrl
+      });
+    };
+
 	});
