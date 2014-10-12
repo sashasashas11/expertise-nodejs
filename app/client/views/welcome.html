@@ -7,7 +7,7 @@
     </p>
     <tabset vertical="true" type="pills" class="methods">
       <div ng-repeat="method in methods">
-        <div ng-switch on="method.children? 'notNull': 'null'">
+        <div ng-switch on="(method.children && method.children.length != 0)? 'notNull': 'null'">
             <span ng-switch-when="notNull">
                 <accordion close-others="oneAtATime" class="methods">
                     <accordion-group is-open="status.open">
@@ -32,7 +32,7 @@
                     <button ng-show="editText$index" class="btn btn-success glyphicon glyphicon-ok" ng-click="editText$index = false; updateMethod(item)">&nbsp; Зберегти</button>
                     <button ng-show="editText$index" class="btn btn-danger glyphicon glyphicon-share-alt" ng-click="editText$index = false; item.text=tempText">&nbsp; Відміна</button>
                     <div ng-if="!editText$index" ng-bind-html="method.text"></div>
-                    <text-angular ng-show="editText$index" ng-model="item.text"></text-angular>
+                    <text-angular ng-show="editText$index" ng-model="method.text"></text-angular>
                 </tab>
             </span>
         </div>
