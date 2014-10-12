@@ -1,5 +1,5 @@
 angular.module('Expertise')
-    .factory('SignupModalCtrl', function() {
+    .factory('LoginModalCtrl', function() {
       return function($scope, $modalInstance, $http, $location) {
         $scope.user = {};
         $scope.login = function (user, form) {
