@@ -65,7 +65,7 @@ require('./passport.js')(app, passport);
 
 // mount server routes:
 require('./routes/resources')(app);
-//require('./routes/auth')(app, passport);
+require('./routes/auth')(app, passport);
 
 
 // start main server
