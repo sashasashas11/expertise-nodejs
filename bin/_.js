@@ -1,0 +1,22 @@
+module.exports = function() {
+  console.log('Init development environment..');
+  process.env.NODE_ENV = 'development';
+  var express = require('express');
+  var mainApp = express();
+  var mongoose = require('mongoose');
+  exports = module.exports = global.gApp = mainApp;
+  var appConfig = require('./../app/config');
+  appConfig.print();
+  global.appConfig = appConfig.get();
+//  global.apiKeys = appConfig.apiKeys;
+//  global.commons = appConfig.commons;
+//  global.accountsSettings = appConfig.accountsSettings;
+//  global.accessProjectDocsSettings = appConfig.accessProjectDocsSettings;
+  console.log('Create database connection..');
+  var db = mongoose.createConnection(global.appConfig.dbUri);
+  global.dbConnection = db;
+  mainApp.dbMethods = require('./../app/db/models/methodModel')(db);
+  mainApp.dbAccount = require('./../app/db/models/userModel')(db);
+  console.log('Initialized.');
+  return mainApp;
+};
