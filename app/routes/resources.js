@@ -2,6 +2,7 @@ module.exports = function (app) {
   var methodsJson = require('./../methods.json');
 
   app.get ('/welcome', redirectRoot);
+  app.get ('/expertise', redirectRoot);
   app.get ('/api/methods', getMethods);
 
   function redirectRoot(req, res) {

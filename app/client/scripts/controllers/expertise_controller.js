@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('expertise.controllers', []).
-	controller('expertiseController', function ($scope, $http, $cookieStore, $location, $cookies, $modal) {
+angular.module('Expertise').
+	controller('expertiseController', function ($scope, $http, $location, $modal, ExpertiseModalCtrl) {
 
 		$scope.expertise_list = [];
 		$scope.alnernative_list = [];
@@ -17,15 +17,6 @@ angular.module('expertise.controllers', []).
 			{ title:'Альтернативи', content:'Dynamic content 1' },
 			{ title:'Критерії', content:'Dynamic content 2', disabled: true }
 		];
-
-		$scope.singOut = function () {
-			$cookieStore.remove('_expertise_session');
-			delete $cookies['_expertise_session'];
-			$location.path("/users/sign_in");
-			$http.delete('/users/sign_out').success(function() {
-				console.log('ok');
-			});
-		}
 
 		$scope.add_expertise =function() {
 			$scope.show_expertise = true;
@@ -98,8 +89,8 @@ angular.module('expertise.controllers', []).
 
 		$scope.openModalWindow = function () {
 			var modalInstance = $modal.open({
-				templateUrl: 'templates/expertise_modal.html',
-				controller: expertiseModalCtrl,
+				templateUrl: 'views/expertise_modal.html',
+				controller: ExpertiseModalCtrl,
 				resolve: {
 					expertiseList: function () { return $scope.expertise_list; }
 				}
@@ -117,19 +108,6 @@ angular.module('expertise.controllers', []).
 						if (expertiseList[i].id == expertise.id)
 							expertiseList[i] = expertise;
 					}
-					$scope.cancel();
-				});
-			}
-
-			$scope.cancel = function () {
-				$modalInstance.dismiss('cancel');
-			};
-		};
-
-		var expertiseModalCtrl = function ($scope, $modalInstance, expertiseList) {
-			$scope.save = function(expertise) {
-				$http.post("/expertizes.json", { name: expertise.name, goal: expertise.goal, method: "test" }).success(function(res){
-					expertiseList.push({ name: expertise.name, goal: expertise.goal });
 					$scope.cancel();
 				});
 			}

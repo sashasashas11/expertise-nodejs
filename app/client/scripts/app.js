@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('Expertise', [
-//		'expertise.controllers',
 		'ngRoute',
 //		'ngCookies',
 		'ui.bootstrap',
@@ -11,7 +10,7 @@ angular.module('Expertise', [
   .config(function ($routeProvider) {
 		$routeProvider.
 			when("/welcome", { templateUrl: "views/welcome.html", controller: "welcomeController" }).
-			when("/expertise", { templateUrl: "templates/expertise.html", controller: "expertiseController" }).
+			when("/expertise", { templateUrl: "views/expertise.html", controller: "expertiseController" }).
 			otherwise({redirectTo: '/welcome'});
 	})
 	.config(['$locationProvider', function ($locationProvider) {
