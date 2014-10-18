@@ -32,6 +32,13 @@ module.exports = function (app) {
     });
   }
 
+  function createRandomHash(size, callback) {
+    var crypto = require("crypto");
+    crypto.randomBytes(size || 20, function (err, buf) {
+      callback(err, buf.toString('hex'));
+    });
+  }
+
 
   function createInactiveAccount(account_info, callback) {
     createRandomHash(20, function(err, buf) {
@@ -91,6 +98,7 @@ module.exports = function (app) {
     getAccountBy: getAccountBy,
     dropExpiredAccount: dropExpiredAccount,
     createInactiveAccount: createInactiveAccount,
-    activateAccount: activateAccount,
+    createRandomHash: createRandomHash,
+    activateAccount: activateAccount
   }
 };

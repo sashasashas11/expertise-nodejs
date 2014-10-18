@@ -221,14 +221,14 @@ module.exports = function (app) {
         return;
       }
       if (user == undefined) {
-        database.createInactiveUser({email: email, first_name: first_name, last_name: last_name, initial_password: password}, function(err, acc) {
+        database.createInactiveAccount({email: email, first_name: first_name, last_name: last_name, initial_password: password}, function(err, acc) {
           if (err) return errorRequest(res, SIGNUP_ERR_UNABLE_TO_CREATE_USER.replace('[ERROR]', err));
           var mailer = require('./../libs/mailer')(app)
             , protocol = "http://"
             , curHost = req.get('host');
 
           var confirmationLink = protocol + curHost + CONFIRMATION_LINK.replace('_TOKEN_', acc.confirmEmailToken);
-          mailer.sendConfirmationEmail({to: user.email, firstName:  user.first_name, confirmationLink: confirmationLink});
+          mailer.sendConfirmationEmail({to: acc.email, firstName:  acc.first_name, confirmationLink: confirmationLink});
           return res.send({success :SIGNUP_SUCCESS.replace("[EMAIL]", email), email: email});
         });
       }
