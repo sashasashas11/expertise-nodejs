@@ -1,19 +1,20 @@
 /**
  * Expertise source file
- * ExpertiseSchema module
- * Maps to a MongoDB collection and defines the shape of the documents within Expertise collection
+ * MethodSchema module
+ * Maps to a MongoDB collection and defines the shape of the documents within Methods collection
  * Dependences:
  * @requires Schema
  */
 var Schema = require('mongoose').Schema;
 
 module.exports = function() {
+  //MethodSchema
   return new require('mongoose').Schema(
     {
-      name: { type: String, required: true },
-      goal: { type: String, required: true },
-      criterions: { type: Array, required: false },
-      alternatives: { type: Array, required: false }
+      title: { type: String, required: true },
+      text: { type: String, required: true },
+      // Embedded `Method` schema used
+      children: { type: Array, required: false }
     }
   );
 }

@@ -1,9 +1,27 @@
 angular.module('Expertise')
     .factory('ExpertiseModalCtrl', function() {
-      return function ($scope, $modalInstance, expertiseList) {
+      return function ($scope, $modalInstance, expertiseList, editExpertise, ExpertiseService) {
+        if (editExpertise) {
+          $scope.expertise = angular.copy(editExpertise);
+          $scope.edit = true;
+        }
+
         $scope.save = function(expertise) {
-          $http.post("/expertizes.json", { name: expertise.name, goal: expertise.goal, method: "test" }).success(function(res){
-            expertiseList.push({ name: expertise.name, goal: expertise.goal });
+          ExpertiseService.save({}, expertise, function (res) {
+            if (res.error)
+              return  console.log(res.error);
+            expertiseList.push(res);
+            $scope.cancel();
+          });
+        };
+
+        $scope.update = function(expertise) {
+          ExpertiseService.update({ id: expertise._id }, expertise, function (res) {
+            var index = expertiseList.indexOf(expertise);
+            for (var i = 0; i < expertiseList.length; i++) {
+              if (expertiseList[i]._id == expertise._id)
+                expertiseList[i] = expertise;
+            }
             $scope.cancel();
           });
         };

@@ -32,6 +32,7 @@ var appConfig = require('./config');
 appConfig.print();
 
 global.appConfig = appConfig.get();
+global.commons = appConfig.commons;
 global.rootDir = __dirname;
 
 // establish database connection:
@@ -41,13 +42,14 @@ mongoose.set('debug', true);
 
 app.dbUser = require('./db/models/userModel')(db);
 app.dbMethod = require('./db/models/methodModel')(db);
+app.dbExpertise = require('./db/models/expertiseModel')(db);
 
 // configure Express web framework
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/client');
 
 app.set('title', 'Expertise');
-//app.use(bodyParser({limit: global.commons.bodyParserSizeLimit}));
+app.use(bodyParser({limit: global.commons.bodyParserSizeLimit}));
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.use(methodOverride());
@@ -65,6 +67,7 @@ require('./passport.js')(app, passport);
 
 // mount server routes:
 require('./routes/resources')(app);
+require('./routes/expertises')(app);
 require('./routes/auth')(app, passport);
 
 

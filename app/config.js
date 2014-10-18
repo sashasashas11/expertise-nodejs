@@ -1,5 +1,9 @@
 module.exports = {
 
+  commons: {
+    bodyParserSizeLimit: '50mb'
+  },
+
   // DEVELOP CONFIG ============================================
   development: {
     HostName: 'http://localhost:3000',
