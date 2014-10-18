@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Expertise').
-	controller('expertiseController', function ($scope, $http, $location, $modal, ExpertiseModalCtrl, ExpertiseService) {
+	controller('expertiseController', function ($scope, $http, $location, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction) {
 
 		$scope.expertise_list = [];
 		$scope.criterion = {};
@@ -22,42 +22,10 @@ angular.module('Expertise').
       $scope.expertise = item;
     };
 
-		$scope.addAlternative = function(alternative, expertise) {
-      var index = $scope.expertise_list.indexOf(expertise);
-      expertise.alternatives.push(alternative);
-      ExpertiseService.update({ id: expertise._id }, expertise, function (res) {
-        $scope.alternative.name =  "";
-        $scope.expertise_list[index].alternatives = res.alternatives;
-      });
-		};
-
-		$scope.removeAlternative = function(alternative, expertise) {
-      var index = $scope.expertise_list.indexOf(expertise);
-      var alternativeIndex = $scope.expertise_list[index].alternatives.indexOf(alternative);
-      expertise.alternatives.splice(alternativeIndex, 1);
-      ExpertiseService.update({ id: expertise._id }, expertise, function (res) {
-        $scope.expertise_list[index].alternatives = res.alternatives;
-      });
-		};
-
-//		CRITERION BLOCK
-		$scope.addCriterion = function(criterion, expertise) {
-      var index = $scope.expertise_list.indexOf(expertise);
-      expertise.criterions.push(criterion);
-      ExpertiseService.update({ id: expertise._id }, expertise, function (res) {
-        $scope.criterion.name =  "";
-        $scope.expertise_list[index].criterions = res.criterions;
-      });
-		};
-
-		$scope.removeCriterion = function(criterion, expertise) {
-      var index = $scope.expertise_list.indexOf(expertise);
-      var criterionIndex = $scope.expertise_list[index].criterions.indexOf(criterion);
-      expertise.criterions.splice(criterionIndex, 1);
-      ExpertiseService.update({ id: expertise._id }, expertise, function (res) {
-        $scope.expertise_list[index].criterions = res.criterions;
-      });
-		};
+		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
+    $scope.removeAlternative = ConstructorFunction('delete', $scope, 'alternative', 'alternatives');
+    $scope.addCriterion = ConstructorFunction('add', $scope, 'criterion', 'criterions');
+    $scope.removeCriterion = ConstructorFunction('delete', $scope, 'criterion', 'criterions');
 
 		$scope.expertiseModalWindow = function (expertise) {
 			var modalInstance = $modal.open({
