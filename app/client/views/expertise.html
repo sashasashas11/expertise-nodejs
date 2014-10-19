@@ -16,41 +16,8 @@
 
 <div class="col-md-9">
     <tabset ng-if="expertise.name">
-        <tab heading="Альтернативи">
-            <h2>Експертиза: {{expertise.name}}</h2>
-            <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
-            <div class="form-group">
-                <label>Назва альтернативи
-                    <input ng-model="alternative.name" class="form-control" type="text"/>
-                </label>
-                <button ng-click="addAlternative(alternative, expertise)" class="btn btn-success">Додати</button>
-            </div>
-            <div class="criterions">
-                <ul><h2>Альтернативи:</h2>
-                    <li ng-repeat="item in expertise.alternatives">
-                        {{item.name}}
-                        <button ng-click="removeAlternative(item, expertise)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
-                    </li>
-                </ul>
-            </div>
-        </tab>
-        <tab heading="Критерії">
-            <h2>Експертиза: {{expertise.name}}</h2>
-            <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
-            <div class="form-group">
-                <label>Назва критерію
-                    <input ng-model="criterion.name" class="form-control" type="text"/>
-                </label>
-                <button ng-click="addCriterion(criterion, expertise)" class="btn btn-success">Додати</button>
-            </div>
-            <div class="criterions">
-                <ul><h2>Критерії:</h2>
-                    <li ng-repeat="item in expertise.criterions">
-                        {{item.name}}
-                        <button ng-click="removeCriterion(item, expertise)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
-                    </li>
-                </ul>
-            </div>
+        <tab heading="{{ tab.title}}" ng-repeat="tab in tabs">
+            <div ng-include data-src="'views/tabs/' + tab.content + '.html'"></div>
         </tab>
     </tabset>
 </div>

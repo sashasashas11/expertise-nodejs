@@ -3,24 +3,25 @@
 angular.module('Expertise').
 	controller('expertiseController', function ($scope, $http, $location, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction) {
 
-		$scope.expertise_list = [];
+		$scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
 
-    $scope.expertise_list = ExpertiseService.query();
-
-		$scope.tabs = [ { title:'Альтернативи' }, { title:'Критерії', disabled: true } ];
+		$scope.tabs = [
+      { title:'Альтернативи', content: 'alternative' },
+      { title:'Критерії', content: 'criterion' },
+      { title:'Експерти', content: 'experts' }
+    ];
 
     $scope.removeExpertise = function (expertise) {
       ExpertiseService.delete({ id: expertise._id }, expertise, function (res) {
         var index = $scope.expertise_list.indexOf(expertise);
         $scope.expertise_list.splice(index, 1);
+        $scope.expertise = {};
       });
     };
 
-    $scope.show = function(item) {
-      $scope.expertise = item;
-    };
+    $scope.show = function(item) { $scope.expertise = item; };
 
 		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
     $scope.removeAlternative = ConstructorFunction('delete', $scope, 'alternative', 'alternatives');
