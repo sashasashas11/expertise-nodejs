@@ -19,7 +19,7 @@ var morgan      = require('morgan');      // log every request to the console
 var passport    = require('passport');
 
 //var flash       = require('connect-flash');
-//var session     = require('express-session');
+var session     = require('express-session');
 var methodOverride = require('method-override'); // simulate DELETE and PUT
 
 exports = module.exports = global.gApp = app;
@@ -40,9 +40,13 @@ var db = mongoose.createConnection(global.appConfig.dbUri);
 global.dbConnection = db;
 mongoose.set('debug', true);
 
+
 app.dbUser = require('./db/models/userModel')(db);
 app.dbMethod = require('./db/models/methodModel')(db);
 app.dbExpertise = require('./db/models/expertiseModel')(db);
+
+// Configure passport (Enable users authentication:)
+require('./passport.js')(app, passport);
 
 // configure Express web framework
 app.engine('html', require('ejs').renderFile);
@@ -55,15 +59,14 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.use(methodOverride());
 //app.use(flash());
 app.use(morgan(global.appConfig.logLevel));
-//app.use(session({ secret: 'my session secret', resave: true, saveUninitialized: true }));
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(session({ secret: 'my session secret', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Configure passport (Enable users authentication:)
-require('./passport.js')(app, passport);
+
 
 // Setup Mailer
-//var mailer = require('./libs/mailer')(app);
+var mailer = require('./libs/mailer')(app);
 
 // mount server routes:
 require('./routes/resources')(app);

@@ -17,14 +17,16 @@ mainApp.dbAccount.register(new mainApp.dbAccount({ email: EMAIL, first_name: FIR
     console.log(err);
     process.exit(0)
   }
-//  mainApp.dbMethods.insert(methodsJson.data, function (err, data) {
-//    if (err) {
-//      console.log(err);
-//      process.exit(0)
-//    }
-//    console.log('New registered account created. E-Mail: '+EMAIL+', password: ' + PASSW);
-//    process.exit(0)
-//  });
-  console.log('New registered account created. E-Mail: '+EMAIL+', password: ' + PASSW);
-  process.exit(0)
+  var data = methodsJson.data[0];
+  var model = new mainApp.dbMethods(data);
+  model.save(function (err, data) {
+    if (err) {
+      console.log(err);
+      process.exit(0)
+    }
+    console.log('Add Method');
+    process.exit(0)
+  });
+//  console.log('New registered account created. E-Mail: '+EMAIL+', password: ' + PASSW);
+//  process.exit(0)
 });

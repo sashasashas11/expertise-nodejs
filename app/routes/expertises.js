@@ -4,15 +4,15 @@ module.exports = function (app) {
   var ExpertiseModel = app.dbExpertise;
   var AccountModel = app.dbUser;
 
-//  app.get('/api/expertises', authDefender.ensureAuthenticatedAsync, index);      // curl http://0.0.0.0:3000/api/expertises/
-//  app.post('/api/expertises', authDefender.ensureAuthenticatedAsync, create);    // curl -X POST http://0.0.0.0:3000/api/expertises --data "url"="http://.."
-//  app.get('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, show);    // curl http://0.0.0.0:3000/api/expertises/537f5
-//  app.put('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, update);  //curl -X PUT http://0.0.0.0:3000/api/expertises/537f5 --data "url"="http://..."
-//  app.delete('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
-  app.get('/api/expertises', index);      // curl http://0.0.0.0:3000/api/expertises/
-  app.post('/api/expertises', create);    // curl -X POST http://0.0.0.0:3000/api/expertises --data "url"="http://.."
-  app.put('/api/expertises/:id', update);  //curl -X PUT http://0.0.0.0:3000/api/expertises/537f5 --data "url"="http://..."
-  app.delete('/api/expertises/:id', del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
+  app.get('/api/expertises', authDefender.ensureAuthenticatedAsync, index);      // curl http://0.0.0.0:3000/api/expertises/
+  app.post('/api/expertises', authDefender.ensureAuthenticatedAsync, create);    // curl -X POST http://0.0.0.0:3000/api/expertises --data "url"="http://.."
+  app.get('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, show);    // curl http://0.0.0.0:3000/api/expertises/537f5
+  app.put('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, update);  //curl -X PUT http://0.0.0.0:3000/api/expertises/537f5 --data "url"="http://..."
+  app.delete('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
+//  app.get('/api/expertises', index);      // curl http://0.0.0.0:3000/api/expertises/
+//  app.post('/api/expertises', create);    // curl -X POST http://0.0.0.0:3000/api/expertises --data "url"="http://.."
+//  app.put('/api/expertises/:id', update);  //curl -X PUT http://0.0.0.0:3000/api/expertises/537f5 --data "url"="http://..."
+//  app.delete('/api/expertises/:id', del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
 
   // ---
 
