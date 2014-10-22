@@ -6,20 +6,20 @@
 
     <form name="form" ng-submit="login(user, form)" class="form-login {{notify.type}}" novalidate>
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="E-mail" name="username" required autofocus focus ng-model="user.username">
-            <div ng-show="form.username.$error.required" class="error-message">Username is required</div>
+            <input type="email" class="form-control" placeholder="Ел-Адрес" name="username" required autofocus focus ng-model="user.username">
+            <div ng-show="form.username.$error.required" class="error-message">E-Mail is required</div>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" name="password" required ng-model="user.password">
+            <input type="password" class="form-control" placeholder="Пароль" name="password" required ng-model="user.password">
         </div>
 
 
-        <div class="wrapper-checkbox">
-            <input type="checkbox" name="checkboxG1" id="checkboxG14" class="css-checkbox" ng-model="user.checked" />
-            <label for="checkboxG14" class="css-label-checkbox">
-                Remember me
-            </label>
-        </div>
+        <!--<div class="wrapper-checkbox">-->
+            <!--<input type="checkbox" name="checkboxG1" id="checkboxG14" class="css-checkbox" ng-model="user.checked" />-->
+            <!--<label for="checkboxG14" class="css-label-checkbox">-->
+                <!--Remember me-->
+            <!--</label>-->
+        <!--</div>-->
         <button class="btn btn-lg btn-block btn-success" type="submit" ng-disabled="!form.$valid">Логін</button>
     </form>
 </div>

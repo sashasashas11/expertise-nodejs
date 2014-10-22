@@ -1,10 +1,10 @@
 angular.module('Expertise')
-    .factory('LoginModalCtrl', function() {
+    .factory('SignupModalCtrl', function() {
       return function($scope, $modalInstance, $http, $location) {
         $scope.user = {};
-        $scope.login = function (user, form) {
-          $http.post('/login', user).success(function (res) {
-            $location.path("/expertise");
+        $scope.signup = function (user, form) {
+          $http.post('/signup', user).success(function (res) {
+            $location.path("/");
             $scope.cancel();
           })
         };

@@ -8,7 +8,7 @@ angular.module('Expertise').
 		});
 
 		$scope.updateMethod = function(method) {
-			$http.put('/api/methods/'+ method.id, { text: method.text })
+			$http.put('/api/methods/'+ method._id, { text: method.text })
 		};
 
 	});

@@ -29,7 +29,7 @@
             <span ng-switch-when="null">
                 <tab heading="{{method.title}}" class="custom-tab">
                     <button ng-hide="editText$index" class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editText$index = true">&nbsp; Редагувати</button>
-                    <button ng-show="editText$index" class="btn btn-success glyphicon glyphicon-ok" ng-click="editText$index = false; updateMethod(item)">&nbsp; Зберегти</button>
+                    <button ng-show="editText$index" class="btn btn-success glyphicon glyphicon-ok" ng-click="editText$index = false; updateMethod(method)">&nbsp; Зберегти</button>
                     <button ng-show="editText$index" class="btn btn-danger glyphicon glyphicon-share-alt" ng-click="editText$index = false; item.text=tempText">&nbsp; Відміна</button>
                     <div ng-if="!editText$index" ng-bind-html="method.text"></div>
                     <text-angular ng-show="editText$index" ng-model="method.text"></text-angular>
