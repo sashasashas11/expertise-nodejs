@@ -13,6 +13,7 @@ module.exports = function() {
       name: { type: String, required: true },
       goal: { type: String, required: true },
       criterions: { type: Array, required: false },
+      account: {type: Schema.ObjectId, ref: 'UserSchema'},
       alternatives: { type: Array, required: false }
     }
   );

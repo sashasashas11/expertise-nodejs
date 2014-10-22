@@ -3,6 +3,7 @@ angular.module('Expertise')
             return $resource('/api/expertises/:id',{'id': '@id'}, {
               'update': {
                 method: 'PUT'
-              }
+              },
+              'query': {method: 'GET', isArray: true }
             });
         });

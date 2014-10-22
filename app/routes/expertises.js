@@ -33,6 +33,7 @@ module.exports = function (app) {
   }
   function create(req, res) {
     var attrHash = req.body;
+    attrHash['account'] = mongoose.Types.ObjectId(authDefender.getCurrentUser(req)._id);
 
 //      attrHash['authorName'] = [acc.first_name, acc.last_name].join(' ');
       var feature = new ExpertiseModel(attrHash);

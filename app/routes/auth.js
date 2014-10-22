@@ -2,8 +2,6 @@ var PASSWORD_MIN_LENGTH = 1;
 var passport = require('passport');
 var authDefender = require('./../libs/auth')();
 
-var mailer = require
-
 var CONFIRMATION_LINK = '/signup_confirm/_TOKEN_';
 var CHANGE_PASSWORD_LINK = '/recover_password/_TOKEN_';
 var SUCCESS_CONFIRMATION_LINK = '/signup_confirm_success';
@@ -29,70 +27,73 @@ var ERR_INVALID_TOKEN = 'The token is invalid';
 /*
 * TODO: EXTRACT ME !!
  */
-function createRandomHash(size, callback) {
-  var crypto = require("crypto");
-  crypto.randomBytes(size || 20, function (err, buf) {
-    callback(err, buf.toString('hex'));
-  });
-}
-function dropExpiredUserRegistration(email, callback) {
-  app.dbUser.findOne({email: email, active: false}, function (err, user) {
-    if (user && user.confirmEmailExpires < Date.now()) {
-      user.remove(function (err) {
-        console.log('! Drop expired user registration' + user);
-        callback(err);
-      });
-    }
-  });
-}
-function createInactiveUser(user_info, callback) {
-  createRandomHash(20, function(err, buf) {
-    user_info.confirmEmailToken = buf.toString('hex');
-    var expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 7);
-    user_info.confirmEmailExpires = expiresAt;
-    user_info.active = false;
-    var inactiveUser = new app.dbUser(user_info);
-    inactiveUser.save(function (err, user, numberAffected) {
-      return callback(err, user);
-    });
-  });
-}
-function activateUser(token, callback) {
-  app.dbUser.findOne({confirmEmailToken: token}, function (err, user) {
-    if (err) return callback(err, null);
-    if (!user) return callback(null, null);
-    if (user.confirmEmailExpires < Date.now()) {
-      dropExpiredUserRegistration(user.email, function () {
-        return callback({error: 'sorry, your link is expired'});
-      });
-      return;
 
-    }
-    var user_info = {
-      email: user.email,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      active: true
-    };
-    var pass = user.initial_password;
-
-
-    return user.remove(function (err) {
-      if (err) return callback(err);
-      app.dbUser.register(new app.dbUser(user_info), pass, function (err, user) {
-        if (err) return callback(err);
-        return callback(null, user);
-      });
-    });
-  });
-}
 /*
 * ENDTODO
 * */
 
 module.exports = function (app) {
   var database = require('./../helpers/dataBase')(app);
+
+
+  function createRandomHash(size, callback) {
+    var crypto = require("crypto");
+    crypto.randomBytes(size || 20, function (err, buf) {
+      callback(err, buf.toString('hex'));
+    });
+  }
+  function dropExpiredUserRegistration(email, callback) {
+    app.dbUser.findOne({email: email, active: false}, function (err, user) {
+      if (user && user.confirmEmailExpires < Date.now()) {
+        user.remove(function (err) {
+          console.log('! Drop expired user registration' + user);
+          callback(err);
+        });
+      }
+    });
+  }
+  function createInactiveUser(user_info, callback) {
+    createRandomHash(20, function(err, buf) {
+      user_info.confirmEmailToken = buf.toString('hex');
+      var expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 7);
+      user_info.confirmEmailExpires = expiresAt;
+      user_info.active = false;
+      var inactiveUser = new app.dbUser(user_info);
+      inactiveUser.save(function (err, user, numberAffected) {
+        return callback(err, user);
+      });
+    });
+  }
+  function activateUser(token, callback) {
+    app.dbUser.findOne({confirmEmailToken: token}, function (err, user) {
+      if (err) return callback(err, null);
+      if (!user) return callback(null, null);
+      if (user.confirmEmailExpires < Date.now()) {
+        dropExpiredUserRegistration(user.email, function () {
+          return callback({error: 'sorry, your link is expired'});
+        });
+        return;
+
+      }
+      var user_info = {
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        active: true
+      };
+      var pass = user.initial_password;
+
+
+      return user.remove(function (err) {
+        if (err) return callback(err);
+        app.dbUser.register(new app.dbUser(user_info), pass, function (err, user) {
+          if (err) return callback(err);
+          return callback(null, user);
+        });
+      });
+    });
+  }
 
   app.get('/user', authDefender.ensureAuthenticated, function(req, res){
     res.render('user', { user: req.user });
@@ -118,7 +119,7 @@ module.exports = function (app) {
     res.render('index.html');
   }
   function processLogin(req, res) {
-    res.redirect('/welcome');
+    res.redirect('/expertise');
   }
   function isAuthenticated(req, res) {
     res.send({status: req.isAuthenticated()});

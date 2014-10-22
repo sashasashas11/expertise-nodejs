@@ -4,8 +4,13 @@ angular.module('Expertise')
         $scope.user = {};
         $scope.login = function (user, form) {
           $http.post('/login', user).success(function (res) {
-            $location.path("/");
+            $location.path("/expertise");
+            $scope.cancel();
           })
-        }
+        };
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
       }
     });
