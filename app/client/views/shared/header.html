@@ -6,8 +6,8 @@
                 <li ng-show="user"><a href="/expertise">Експертизи</a></li>
                 <li ng-show="user"><a id="sign_out" href="#">Користувач</a></li>
                 <li ng-hide="user" ng-click="loginModelOpen()"><a href="#">Вхід</a></li>
-                <li ng-hide="user" ng-click="signupModelOpen()"><a href="#">Регістрація</a></li>
-                <li ng-show="user" ng-click="logout()"><a href="#">Вихід</a></li>
+                <li ng-hide="user" ng-click="signupModelOpen()"><a href="#">Реєстрація</a></li>
+                <li ng-show="user"><a target="_self" ng-href="/logout">Вихід</a></li>
 
             </ul>
         </nav>

@@ -126,7 +126,7 @@ module.exports = function (app) {
   }
   function processLogout(req, res) {
     req.logout();
-    res.send({status :"ok"});
+    res.redirect('/welcome');
   }
 
 
