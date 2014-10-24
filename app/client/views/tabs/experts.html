@@ -1,0 +1,26 @@
+<h2>Експертиза: {{expertise.name}}</h2>
+<span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+ <table class="table table-hover">
+     <thead>
+     <tr>
+         <th>Ім’я</th>
+         <th>Прізвище</th>
+         <th>Електронна адреса</th>
+         <th>Додати/Видалити</th>
+     </tr>
+     <thody>
+         <tr ng-if="users.length == 0">
+             <th><alert type="info">На жаль вам не доступний ні один експерт.</alert></th>
+         </tr>
+         <tr ng-repeat="item in users">
+             <th>{{item.first_name}}</th>
+             <th>{{item.last_name}}</th>
+             <th>{{item.email}}</th>
+             <th>
+                 <button class="btn btn-success">Додати</button>
+                 <button class="btn btn-danger">Видалити</button>
+             </th>
+         </tr>
+     </thody>
+     </thead>
+ </table>

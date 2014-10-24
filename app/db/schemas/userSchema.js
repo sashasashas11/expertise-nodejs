@@ -11,6 +11,8 @@ module.exports = function() {
       first_name: { type: String, required: false },
       last_name:  { type: String, required: false },
       email:      { type: String, required: false },
+      isAdmin:    { type: Boolean, required: false, default: false },
+      rule: Object,
 
       //Auth-properties:
       salt: String,
