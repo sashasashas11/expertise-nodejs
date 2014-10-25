@@ -8,7 +8,7 @@
         <h2>Список експертиз:</h2>
         <li class="list-group-item list-group-item-info list-expertise" ng-repeat="item in expertise_list" ng-click="show(item)">
             <span class="expertise-name">{{item.name}}</span>
-            <i ng-click="removeExpertise(item)" class="glyphicon glyphicon-remove remove-expertise"></i>
+            <i ng-click="removeExpertiseModalWindow(item)" class="glyphicon glyphicon-remove remove-expertise"></i>
             <i ng-click="expertiseModalWindow(item)" class="glyphicon glyphicon-pencil remove-expertise"></i>
         </li>
     </ul>

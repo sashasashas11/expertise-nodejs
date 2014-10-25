@@ -1,0 +1,58 @@
+/* NOTIFICATIONS
+*****************************/
+.modal-content {
+  .notify-bar {
+    margin: auto -18px 15px;
+    padding: 12px 18px 3px;
+
+    span {
+      margin-left: 28px;
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    i {
+      position: absolute;
+      display: inline-block;
+      width: 19px;
+      height: 17px;
+      margin-right: 9px;
+
+      &.error-icon {
+        background: url('../images/notification/error_icon.png') 0 0 no-repeat;
+      }
+
+      &.warning-icon {
+        background: url('../images/notification/warning_icon.png') 0 0 no-repeat;
+      }
+
+      &.success-icon {
+        background: url('../images/notification/success_icon.png') 0 0 no-repeat;
+      }
+    }
+
+    &.error {
+      background-color: #fde0e0;
+
+      span {
+        color: #D54B4B;
+      }
+    }
+
+    &.warning {
+      background-color: #fff9e6;
+
+      span {
+        color: #69654b;
+      }
+    }
+
+    &.success{
+      background-color: #e8ffe9;
+
+      span {
+        color: rgba(47, 138, 36, 0.95);
+      }
+    }
+  }
+}

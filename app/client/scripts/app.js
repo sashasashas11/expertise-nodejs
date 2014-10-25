@@ -2,7 +2,6 @@
 
 angular.module('Expertise', [
 		'ngRoute',
-//		'ngCookies',
 		'ui.bootstrap',
     'ngResource',
 		'textAngular',
