@@ -4,10 +4,11 @@ module.exports = function (app) {
   var mongoose    = require('mongoose');
 
   app.get ('/welcome', redirectRoot);
-  app.get ('/expertise', redirectRoot);
+  app.get ('/expertise', authDefender.ensureAuthenticated, redirectRoot);
   app.get ('/api/methods', getMethods);
   app.put ('/api/methods/:id', updateMethods);
   app.get ('/api/current_user', authDefender.ensureAuthenticatedAsync, currentUser);
+  app.get ('/experts', getExperts);
 
   function redirectRoot(req, res) {
     res.render('index.html');
@@ -18,6 +19,10 @@ module.exports = function (app) {
       var methods = (data.length == 0) ? methodsJson.data : data;
        res.send({ methods: methods });
     });
+  }
+
+  function getExperts(req, res) {
+
   }
 
   function updateMethods(req, res) {
@@ -41,7 +46,8 @@ module.exports = function (app) {
       id: userRecord.id,
       first_name: userRecord.first_name,
       last_name: userRecord.last_name,
-      email: userRecord.email
+      email: userRecord.email,
+      isAdmin: userRecord.isAdmin
     };
     return res.send(accessibleFields);
   }

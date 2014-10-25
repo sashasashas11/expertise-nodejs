@@ -1,16 +1,11 @@
 'use strict';
 
 angular.module('Expertise').
-	controller('expertiseController', function ($rootScope, $scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction, UserService) {
+	controller('expertiseController', function ($scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction) {
 
     $scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
-    $scope.users = [];
-
-    UserService.get({}, function (res) {
-      $rootScope.user =res;
-    });
 
 		$scope.tabs = [
       { title:'Альтернативи', content: 'alternative' },
