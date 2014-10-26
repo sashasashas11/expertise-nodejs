@@ -1,3 +1,6 @@
+@import "../lib/bootstrap/less/bootstrap.less";
+@icon-font-path: "../lib/bootstrap/fonts/";
+
 .main-container {
   height: 100%;
   overflow: hidden;
@@ -171,4 +174,24 @@
 }
 .panel-group {
   margin-bottom: 0px;
+}
+
+.add-btn:extend(.btn, .btn-success all) {}
+.delete-btn:extend(.btn, .btn-danger all) {}
+.edit-btn:extend(.btn, .btn-primary all, .glyphicon, .glyphicon-pencil all) {}
+.save-btn:extend(.btn, .btn-success all, .glyphicon, .glyphicon-ok all) {}
+.cancel-btn:extend(.btn, .btn-danger all, .glyphicon, .glyphicon-share-alt all) {}
+
+.experts-table:extend(.table all, .table-hover all) {
+  .delete-btn {
+    display: none;
+  }
+  .added_expert {
+    .add-btn {
+      display: none;
+    }
+    .delete-btn {
+      display: block;
+    }
+  }
 }

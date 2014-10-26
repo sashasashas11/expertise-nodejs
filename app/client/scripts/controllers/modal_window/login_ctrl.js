@@ -14,13 +14,11 @@ angular.module('Expertise')
         $scope.user = {};
         $scope.login = function (user, form) {
           $http.post('/login', user).success(function (res) {
-            console.log(res);
             $location.path("/expertise");
             $rootScope.user = UserService.get();
             $scope.cancel();
           })
           .error(function (res) {
-            console.log(res);
             if (typeof res == "object") {
               $scope.notify = {
                 type : Object.keys(res)[0],

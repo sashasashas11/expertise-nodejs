@@ -13,6 +13,7 @@ module.exports = function() {
       email:      { type: String, required: false },
       isAdmin:    { type: Boolean, required: false, default: false },
       rule: Object,
+      expertises: { type: Array, required: false },
 
       //Auth-properties:
       salt: String,

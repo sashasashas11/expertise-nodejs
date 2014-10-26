@@ -7,7 +7,8 @@
     <button ng-click="addAlternative(alternative, expertise)" class="btn btn-success">Додати</button>
 </div>
 <div class="criterions">
-    <ul><h2>Альтернативи:</h2>
+    <ul>
+        <h2 ng-show="expertise.alternatives">Альтернативи:</h2>
         <li ng-repeat="item in expertise.alternatives">
             {{item.name}}
             <button ng-click="removeAlternative(item, expertise)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
