@@ -2,6 +2,7 @@ var authDefender = require('./../libs/auth')();
 
 module.exports = function (app) {
   var ExpertiseModel = app.dbExpertise;
+  var mongoose    = require('mongoose');
   var AccountModel = app.dbUser;
 
   app.get('/api/expertises', authDefender.ensureAuthenticatedAsync, index);      // curl http://0.0.0.0:3000/api/expertises/
@@ -9,26 +10,21 @@ module.exports = function (app) {
   app.get('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, show);    // curl http://0.0.0.0:3000/api/expertises/537f5
   app.put('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, update);  //curl -X PUT http://0.0.0.0:3000/api/expertises/537f5 --data "url"="http://..."
   app.delete('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
-//  app.get('/api/expertises', index);      // curl http://0.0.0.0:3000/api/expertises/
-//  app.post('/api/expertises', create);    // curl -X POST http://0.0.0.0:3000/api/expertises --data "url"="http://.."
-//  app.put('/api/expertises/:id', update);  //curl -X PUT http://0.0.0.0:3000/api/expertises/537f5 --data "url"="http://..."
-//  app.delete('/api/expertises/:id', del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
-
-  // ---
-
-  var mongoose    = require('mongoose');
 
   function index(req, res) {
     var qSkip = req.query.skip;
     var qTake = req.query.take;
     var qSort = req.query.sort;
-    var qFilter = req.query.filter;
-    return ExpertiseModel.find({account: authDefender.getCurrentUser(req)}).sort(qSort).skip(qSkip).limit(qTake)
+    var currentUser = authDefender.getCurrentUser(req)
+    return ExpertiseModel.find({account: currentUser}).sort(qSort).skip(qSkip).limit(qTake)
       .exec(function (err, features) {
         if (err) {
           return res.send( { error: err } );
         }
-        return res.send(features);
+          var features = features;
+          return ExpertiseModel.find({_id: {$in: currentUser.expertises}}).exec(function (err, result) {
+            return res.send(features.concat(result));
+          });
       });
   }
   function create(req, res) {

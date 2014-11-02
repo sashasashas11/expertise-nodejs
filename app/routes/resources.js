@@ -40,7 +40,7 @@ module.exports = function (app) {
   function getExperts(req, res) {
     var currentUser = authDefender.getCurrentUser(req);
     if (!currentUser.isAdmin)
-      res.send({error: PERMISSION_DENIED });
+      return res.send({error: PERMISSION_DENIED });
     app.dbUser.find({ _id: { $ne: currentUser._id } }, { email: true, first_name: true, last_name: true, isAdmin: true, expertises: true }, function (err, experts) {
       if (err)  return console.log(err);
       return res.send(experts);
