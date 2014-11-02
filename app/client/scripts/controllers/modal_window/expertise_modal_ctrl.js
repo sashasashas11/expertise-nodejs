@@ -12,7 +12,7 @@ angular.module('Expertise')
         if (editExpertise) {
           $scope.expertise = angular.copy(editExpertise);
           $scope.methods.forEach(function (method, index) {
-            if (method.name == editExpertise.method.name)
+            if (editExpertise.method && method.name == editExpertise.method.name)
               $scope.methodIndex = index;
           });
           $scope.edit = true;

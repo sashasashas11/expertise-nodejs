@@ -28,10 +28,18 @@
 
 .nav-tabs li {
     cursor: pointer;
+
+    a:focus {
+      outline: inherit;
+    }
 }
 
 .modal-dialog {
     width: 300px;
+
+    .modal-content {
+       width: 350px;
+    }
 }
 
 .modal-body .form-group label {
@@ -203,4 +211,28 @@ label {
 
 .form-control {
   max-width: 300px;
+}
+
+/* Message Box
+**********************/
+.alert-warning {
+  background-color: rgba(120, 120, 120, 0.80);
+  color: #54FF84;
+  font-weight: bold;
+  border: none;
+}
+.custom-massage-box {
+  min-height: 40px;
+  width: 311px;
+  padding: 10px;
+  position: absolute;
+  top: 53px;
+  margin: auto 50%;
+  z-index: 1000;
+  padding-right: 22px;
+}
+.alert-dismissable .close {
+  position: absolute;
+  top: 7px;
+  right: 9px;
 }

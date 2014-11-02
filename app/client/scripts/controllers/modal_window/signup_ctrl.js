@@ -1,10 +1,11 @@
 angular.module('Expertise')
     .factory('SignupModalCtrl', function() {
-      return function($scope, $modalInstance, $http, $location) {
+      return function($rootScope, $scope, $modalInstance, $http, $location) {
         $scope.user = {};
         $scope.signup = function (user, form) {
           $http.post('/signup', user).success(function (res) {
             $location.path("/");
+            $rootScope.messageBox("Акаунт був успішно створений, на ваш E-Mail був надісланий лист з підтвердженням", "warning");
             $scope.cancel();
           })
         };

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/expertise.css">
 </head>
 <body ng-controller="mainController">
+<alert class="show-massages custom-massage-box" ng-show="alert" type="{{alert.type}}" close="closeAlert()">{{alert.msg}}</alert>
 <div ng-view="" class="main-container"></div>
 
 <script src="lib/jquery/jquery.min.js"></script>
