@@ -1,9 +1,10 @@
 <div ng-include data-src="'views/shared/header.html'"></div>
 
 <div class="col-md-3">
-    <div class="block-menu">
-        <button ng-click="expertiseModalWindow()" class="btn btn-lg btn-primary glyphicon glyphicon-plus">&nbsp;Додати експертизу</button>
+    <div class="block-menu" ng-if="user.isAdmin">
+        <button ng-click="expertiseModalWindow()" class="add-expertise-btn">&nbsp;Додати експертизу</button>
     </div>
+    <div ng-if="expertise_list.length == 0" class="alert-info welcome no-expertise">На жаль вам не дуступна ні одна експертиза</div>
     <ul class="list-group" ng-if="expertise_list.length != 0">
         <h2>Список експертиз:</h2>
         <li class="list-group-item list-group-item-info list-expertise" ng-repeat="item in expertise_list" ng-click="show(item)">

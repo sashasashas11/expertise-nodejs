@@ -184,6 +184,7 @@
 .edit-btn:extend(.btn, .btn-primary all, .glyphicon, .glyphicon-pencil all) {}
 .save-btn:extend(.btn, .btn-success all, .glyphicon, .glyphicon-ok all) {}
 .cancel-btn:extend(.btn, .btn-danger all, .glyphicon, .glyphicon-share-alt all) {}
+.add-expertise-btn:extend(.btn all, .btn-lg all, .btn-primary all, .glyphicon all, .glyphicon-plus all){}
 
 .experts-table:extend(.table all, .table-hover all) {
   .delete-btn {
@@ -209,8 +210,21 @@ label {
   font-size: 12px;
 }
 
+select {
+  width: 100%;
+  height: 40px;
+
+  &:focus {
+    border: 1px solid #66afe9;
+  }
+}
+
 .form-control {
   max-width: 300px;
+}
+
+.no-expertise {
+  width: 430px;
 }
 
 /* Message Box
