@@ -11,6 +11,10 @@
         <label>Ціль
             <textarea class="form-control" ng-model="expertise.goal" rows="3"></textarea></label>
     </div>
+    <div class="form-group">
+        <label>Метод</label>
+        <select ng-model="expertise.method" ng-options="method.name for method in methods" ng-init="expertise.method = methods[methodIndex]"></select>
+    </div>
 </div>
 <div class="modal-footer">
     <button ng-hide="edit" ng-click="save(expertise)" class="btn btn-success">Створити</button>

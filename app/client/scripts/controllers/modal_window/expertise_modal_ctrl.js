@@ -1,8 +1,20 @@
 angular.module('Expertise')
     .factory('ExpertiseModalCtrl', function() {
-      return function ($scope, $modalInstance, expertiseList, editExpertise, ExpertiseService) {
+      return function ($scope, $modalInstance, expertiseList, editExpertise, ExpertiseService, MethodsService) {
+        $scope.methods = [
+          {name: "Метод аналізу співвідношень"},
+          {name: "Метод нормування"},
+          {name: "Метод попарних порівнянь"},
+          {name: "Метод ранжування"},
+          {name: "Метод аналізу ієрархій"},
+        ];
+
         if (editExpertise) {
           $scope.expertise = angular.copy(editExpertise);
+          $scope.methods.forEach(function (method, index) {
+            if (method.name == editExpertise.method.name)
+              $scope.methodIndex = index;
+          });
           $scope.edit = true;
         }
 

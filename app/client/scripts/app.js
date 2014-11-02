@@ -5,9 +5,7 @@ angular.module('Expertise', [
 		'ui.bootstrap',
     'ngResource',
 		'textAngular',
-		'ui',
-//    'ngAnimate',
-//    'ngAria',
+//		'ui',
 		'ngMaterial'
 	])
   .config(function ($routeProvider, $locationProvider) {
