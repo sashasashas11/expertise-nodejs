@@ -1,0 +1,23 @@
+<div class="evaluation-page">
+    <h2>Експертиза: {{expertise.name}}</h2>
+    <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+     <h2>Оцінювання за методом нормування</h2>
+    <ul>
+        <accordion close-others="oneAtATime">
+            <accordion-group is-open="status[$index].open" ng-repeat="criteria in expertise.criterions">
+                <accordion-heading>
+                    <h3 class="criteria-name">{{criteria.name}}
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </h3>
+                </accordion-heading>
+                <div ng-repeat="alternative in expertise.alternatives">
+                    {{alternative.name }}
+                    <md-slider discrete ng-model="evaluation[criteria.name][alternative.name]" step="1" min="0" max="10" aria-label="{{alternative.name}}"></md-slider>
+                </div>
+            </accordion-group>
+
+        </accordion>
+    </ul>
+
+
+</div>

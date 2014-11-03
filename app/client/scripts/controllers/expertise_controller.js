@@ -7,11 +7,13 @@ angular.module('Expertise').
 		$scope.criterion = {};
 		$scope.alternative = {};
     $scope.users = ExpertService.query();
+      $scope.status = [ { open: true } ];
 
 		$scope.tabs = [
       { title:'Альтернативи', content: 'alternative' },
       { title:'Критерії', content: 'criterion' },
-      { title:'Експерти', content: 'experts' }
+      { title:'Експерти', content: 'experts' },
+      { title:'Оцінювання', content: 'evaluation' }
     ];
 
     $scope.removeExpertise = function (expertise) {
