@@ -2,12 +2,24 @@
 
 angular.module('Expertise').
 	controller('expertiseController', function ($scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction,
-                                              ModalWindowFactory, DeleteModalCtrl, ExpertService) {
+                                              ModalWindowFactory, DeleteModalCtrl, ExpertService, $mdToast, $animate) {
     $scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
     $scope.users = ExpertService.query();
       $scope.status = [ { open: true } ];
+
+      $scope.setting = { minValue: 1, maxValue: 100, percentages: 'false' };
+
+      $scope.$watch('setting.minValue', function(value) {
+        if (value < 0)
+          $scope.setting.minValue = 0
+      });
+
+      $scope.$watch('setting.maxValue', function(value) {
+        if (value < 0)
+          $scope.setting.maxValue = 0
+      });
 
 		$scope.tabs = [
       { title:'Альтернативи', content: 'alternative' },
@@ -24,7 +36,17 @@ angular.module('Expertise').
       });
     };
 
-    $scope.show = function(item) { $scope.expertise = item; };
+    $scope.show = function(item) {
+      $scope.expertise = item;
+      $scope.evaluation = item.criterions.map(function (value) {
+        return {
+          criterionName: value.name,
+          alternatives: item.alternatives.map(function (i) {
+            return { name: i.name,  mark: 2}
+          })
+        }
+      });
+    };
 
 		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
     $scope.removeAlternative = ConstructorFunction('delete', $scope, 'alternative', 'alternatives');
@@ -65,5 +87,24 @@ angular.module('Expertise').
 				}
 			});
 		};
+
+    $scope.complexToastIt = function() {
+      $mdToast.show({
+        controller: function($scope, $mdToast) {
+          $scope.closeToast = function() {
+            $mdToast.hide();
+          };
+        },
+        templateUrl: 'views/toast-template.html',
+        hideDelay: 5000,
+        position: "top right"
+      });
+    };
+
+    $scope.save = function (evaluation) {
+      $scope.complexToastIt();
+      console.log(evaluation);
+    }
+
 
 	});

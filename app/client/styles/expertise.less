@@ -252,11 +252,61 @@ select {
   }
   .panel-heading {
     padding: 0;
+
+    a.accordion-toggle {
+      outline: none;
+    }
   }
   .criteria-name {
     text-align: center;
     background-color: rgb(224, 224, 224);
     padding: 11px;
     margin: 0;
+    width: 100%;
+  }
+
+  .md-whiteframe-z4 {
+    margin-bottom: 22px;
   }
 }
+
+.save-btn {
+  margin-top: -18px;
+  button {
+    display: inline-block;
+  }
+}
+
+md-button.save-btn:not([disabled]):hover, md-button.save-btn:not([disabled]).focus {
+  background-color: darken(@btn-success-bg, 10%);;
+}
+
+.title-expertise-method {
+  text-align: center;
+}
+
+.mark-icon {
+  background-color: #03a9f4;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 30px;
+  height: 22px;
+  border-radius: 19px;
+  color: #ffffff;
+  font-weight: bold;
+  font-style: normal;
+}
+
+md-input-group.md-input-focused label, .md-input-group.md-input-focused label {
+  color: #03a9f4;
+  -webkit-transform: translate3d(0, 4px, 0) scale(0.75);
+  transform: translate3d(0, 4px, 0) scale(0.75); }
+md-input-group.md-input-focused input, md-input-group.md-input-focused textarea, .md-input-group.md-input-focused input, .md-input-group.md-input-focused textarea {
+  color: #2f2f2f;
+  border-color: #03a9f4;
+  border-bottom-width: 2px; }
+md-input-group.md-input-has-value label, .md-input-group.md-input-has-value label {
+  color: #03a9f4;
+  -webkit-transform: translate3d(0, 4px, 0) scale(0.75);
+  transform: translate3d(0, 4px, 0) scale(0.75); }
