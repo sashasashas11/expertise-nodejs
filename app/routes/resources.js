@@ -1,6 +1,7 @@
 module.exports = function (app) {
   var methodsJson = require('./../methods.json');
   var authDefender = require('./../libs/auth')();
+  var MarkModel = app.dbMark;
   var mongoose    = require('mongoose');
 
   var PERMISSION_DENIED = "Доступ заборонений";
@@ -14,8 +15,49 @@ module.exports = function (app) {
   app.get ('/api/experts', authDefender.ensureAuthenticatedAsync, getExperts);
   app.post ('/api/experts/:id', authDefender.ensureAuthenticatedAsync, updateExpertiseForExpert);
 
+//  MARK
+  app.post ('/api/marks', authDefender.ensureAuthenticatedAsync, createMark);
+  app.get ('/api/marks/:id', authDefender.ensureAuthenticatedAsync, getMark);
+
   function redirectRoot(req, res) {
     res.render('index.html');
+  }
+
+  function getMark(req, res) {
+    var reqId = req.param('id');
+    var objId = mongoose.Types.ObjectId(reqId);
+    var account = mongoose.Types.ObjectId(authDefender.getCurrentUser(req)._id);
+    MarkModel.findOne({account: account, expertise: objId}, function (err, result) {
+      if (err) return  console.log(err);
+      return res.send(result);
+    });
+  }
+
+  function createMark(req, res) {
+    var attrHash = req.body;
+    attrHash['account'] = mongoose.Types.ObjectId(authDefender.getCurrentUser(req)._id);
+    var expertise = mongoose.Types.ObjectId(attrHash.expertise);
+
+    var mark = new MarkModel(attrHash);
+    MarkModel.findOne({account: attrHash['account'], expertise: expertise}, function (err, result) {
+      if (err) return  console.log(err);
+
+      if (result == null)
+        mark.save(function (err, mark, numberAffected) {
+          if (err) {
+            return res.send({ error: err });
+          }
+          return res.send(mark);
+        });
+      else
+        MarkModel.update({ _id: result._id }, { criterions:  attrHash.criterions}, function (err, result) {
+          if (err)
+            return res.send( { error: err } );
+
+          res.send({ status: "success" });
+        })
+
+    });
   }
 
   function getMethods(req, res) {

@@ -2,10 +2,11 @@
 
 angular.module('Expertise').
 	controller('expertiseController', function ($scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction,
-                                              ModalWindowFactory, DeleteModalCtrl, ExpertService, $mdToast, $animate) {
+                                              ModalWindowFactory, DeleteModalCtrl, ExpertService, $mdToast, MarkService) {
     $scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
+    $scope.evaluation = {};
     $scope.users = ExpertService.query();
       $scope.status = [ { open: true } ];
 
@@ -38,14 +39,22 @@ angular.module('Expertise').
 
     $scope.show = function(item) {
       $scope.expertise = item;
-      $scope.evaluation = item.criterions.map(function (value) {
-        return {
-          criterionName: value.name,
-          alternatives: item.alternatives.map(function (i) {
-            return { name: i.name,  mark: 2}
-          })
+      MarkService.get({ id: item._id }, function (res) {
+        if (!res.criterions) {
+          $scope.evaluation.criterions = item.criterions.map(function (value) {
+            return {
+              criterionName: value.name,
+              alternatives: item.alternatives.map(function (i) {
+                return { name: i.name,  mark: 0 }
+              })
+            }
+          });
+          $scope.evaluation.expertise = item._id;
         }
+        else
+          $scope.evaluation = res;
       });
+
     };
 
 		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
@@ -102,8 +111,9 @@ angular.module('Expertise').
     };
 
     $scope.save = function (evaluation) {
-      $scope.complexToastIt();
-      console.log(evaluation);
+      MarkService.save(evaluation, function (res) {
+        $scope.complexToastIt();
+      });
     }
 
 

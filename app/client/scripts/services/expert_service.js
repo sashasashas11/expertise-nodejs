@@ -1,4 +1,4 @@
 angular.module('Expertise')
-    .factory('ExpertService', function($resource) {
-      return $resource('/api/experts/:id',{id: "@id"}, {});
+    .factory('MarkService', function($resource) {
+      return $resource('/api/marks/:id',{id: "@id"}, {});
     });

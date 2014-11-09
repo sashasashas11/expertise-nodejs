@@ -16,7 +16,7 @@
             <md-text-float type="number" label="До" ng-model="setting.maxValue" class="long" min="1"> </md-text-float>
         </md-whiteframe>
         <accordion close-others="oneAtATime">
-            <accordion-group is-open="status[$index].open" ng-repeat="item in evaluation">
+            <accordion-group is-open="status[$index].open" ng-repeat="item in evaluation.criterions">
                 <accordion-heading>
                     <md-button class="criteria-name">{{item.criterionName}}
                         <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status[$index].open, 'glyphicon-chevron-right': !status[$index].open}"></i>

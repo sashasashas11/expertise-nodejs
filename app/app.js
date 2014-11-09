@@ -44,6 +44,7 @@ mongoose.set('debug', true);
 app.dbUser = require('./db/models/userModel')(db);
 app.dbMethod = require('./db/models/methodModel')(db);
 app.dbExpertise = require('./db/models/expertiseModel')(db);
+app.dbMark = require('./db/models/markModel')(db);
 
 // Configure passport (Enable users authentication:)
 require('./passport.js')(app, passport);
