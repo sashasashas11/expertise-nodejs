@@ -13,8 +13,7 @@ module.exports = function() {
     {
       title: { type: String, required: true },
       text: { type: String, required: true },
-      // Embedded `Method` schema used
       children: { type: Array, required: false }
     }
   );
-}
+};

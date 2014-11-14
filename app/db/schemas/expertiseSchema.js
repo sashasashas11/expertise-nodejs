@@ -18,4 +18,4 @@ module.exports = function() {
       alternatives: { type: Array, required: false }
     }
   );
-}
+};
