@@ -7,22 +7,16 @@
 
     <form name="form" ng-submit="login(user, form)" class="form-login {{notify.type}}" novalidate>
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="Ел-Адрес" name="username" required autofocus focus ng-model="user.username">
-            <!--<md-text-float type="email" label="Ел-Адрес" placeholder="Ел-Адрес" ng-model="user.username" class="long" name="username" required autofocus> </md-text-float>-->
+            <!--<input type="email" class="form-control" placeholder="Ел-Адрес" name="username" required autofocus focus ng-model="user.username">-->
+            <md-text-float type="email" label="Ел-Адрес" placeholder="Ел-Адрес" ng-model="user.username" class="long" name="username" required autofocus> </md-text-float>
             <div ng-show="form.username.$error.required" class="error-message">Ел-Адрес обовязкове поле</div>
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Пароль" name="password" required ng-model="user.password">
+            <!--<input type="password" class="form-control" placeholder="Пароль" name="password" required ng-model="user.password">-->
+            <md-text-float type="password" label="Пароль" placeholder="Пароль" ng-model="user.password" class="long" name="password" required> </md-text-float>
         </div>
 
-
-        <!--<div class="wrapper-checkbox">-->
-            <!--<input type="checkbox" name="checkboxG1" id="checkboxG14" class="css-checkbox" ng-model="user.checked" />-->
-            <!--<label for="checkboxG14" class="css-label-checkbox">-->
-                <!--Remember me-->
-            <!--</label>-->
-        <!--</div>-->
         <button class="btn btn-lg btn-block btn-success" type="submit" ng-disabled="!form.$valid">Увійти</button>
     </form>
 </div>
