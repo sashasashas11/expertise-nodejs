@@ -12,11 +12,8 @@ module.exports = function (app) {
   app.delete('/api/expertises/:id', authDefender.ensureAuthenticatedAsync, del); // curl -X DELETE http://0.0.0.0:3000/api/expertises/537f5
 
   function index(req, res) {
-    var qSkip = req.query.skip;
-    var qTake = req.query.take;
-    var qSort = req.query.sort;
-    var currentUser = authDefender.getCurrentUser(req)
-    return ExpertiseModel.find({account: currentUser}).sort(qSort).skip(qSkip).limit(qTake)
+    var currentUser = authDefender.getCurrentUser(req);
+    return ExpertiseModel.find({account: currentUser})
       .exec(function (err, features) {
         if (err) {
           return res.send( { error: err } );

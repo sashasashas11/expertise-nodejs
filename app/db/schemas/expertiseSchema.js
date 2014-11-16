@@ -15,7 +15,8 @@ module.exports = function() {
       method: { type: Object, required: false },
       criterions: { type: Array, required: false },
       account: {type: Schema.ObjectId, ref: 'UserSchema'},
-      alternatives: { type: Array, required: false }
+      alternatives: { type: Array, required: false },
+      setting: Object
     }
   );
 };
