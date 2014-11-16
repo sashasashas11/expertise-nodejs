@@ -6,15 +6,6 @@
         <md-button class="btn-lg pull-right save-btn" ng-click="save(evaluation)">Зберегти результати</md-button>
      </h2>
     <ul>
-        <md-whiteframe class="md-whiteframe-z4" layout layout-align="center center">
-            <h3>Налаштування шкали оцінювання:</h3>
-            <md-radio-group ng-model="setting.percentages">
-                <md-radio-button value="true" aria-label="Label 1">У відсотках</md-radio-button>
-                <md-radio-button value="false">Оцінка</md-radio-button>
-            </md-radio-group>
-            <md-text-float type="number" label="Від" ng-model="setting.minValue" class="long"> </md-text-float>
-            <md-text-float type="number" label="До" ng-model="setting.maxValue" class="long" min="1"> </md-text-float>
-        </md-whiteframe>
         <accordion close-others="oneAtATime">
             <accordion-group is-open="status[$index].open" ng-repeat="item in evaluation.criterions">
                 <accordion-heading>
@@ -28,9 +19,6 @@
                     <md-slider discrete ng-model="alternative.mark" step="1" min="{{setting.minValue}}" max="{{setting.maxValue}}" aria-label="{{alternative.name}}"></md-slider>
                 </div>
             </accordion-group>
-
         </accordion>
     </ul>
-
-
 </div>

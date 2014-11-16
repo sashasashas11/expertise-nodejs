@@ -1,0 +1,13 @@
+<div class="evaluation-page" layout-fill>
+    <h2>Експертиза: {{expertise.name}}</h2>
+    <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+    <md-whiteframe class="md-whiteframe-z4" layout layout-align="center center">
+        <h3>Налаштування шкали оцінювання:</h3>
+        <md-radio-group ng-model="setting.percentages">
+            <md-radio-button value="true" aria-label="Label 1">У відсотках</md-radio-button>
+            <md-radio-button value="false">Шкала оцінювання</md-radio-button>
+        </md-radio-group>
+        <md-text-float type="number" label="Від" ng-model="setting.minValue" class="long" ng-change="test()"></md-text-float>
+        <md-text-float type="number" label="До" ng-model="setting.maxValue" class="long" min="1"> </md-text-float>
+    </md-whiteframe>
+</div>

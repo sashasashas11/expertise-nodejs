@@ -8,6 +8,7 @@ module.exports = function (app) {
 
   app.get ('/welcome', redirectRoot);
   app.get ('/expertise', authDefender.ensureAuthenticated, redirectRoot);
+  app.get ('/questionnaire', authDefender.ensureAuthenticated, redirectRoot);
 //  API ROUTES
   app.get ('/api/methods', getMethods);
   app.put ('/api/methods/:id', updateMethods);

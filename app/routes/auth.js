@@ -119,7 +119,7 @@ module.exports = function (app) {
     res.render('index.html');
   }
   function processLogin(req, res) {
-    res.redirect('/expertise');
+    res.redirect('/welcome');
   }
   function isAuthenticated(req, res) {
     res.send({status: req.isAuthenticated()});
