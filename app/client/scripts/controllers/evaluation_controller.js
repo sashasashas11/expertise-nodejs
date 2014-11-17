@@ -4,6 +4,7 @@ angular.module('Expertise').
     controller('evaluationController', function ($scope, ExpertiseService, $mdToast, MarkService) {
       $scope.expertise_list = ExpertiseService.query();
       $scope.evaluation = {};
+      $scope.status = [ { open: true } ];
       $scope.tabs = [
         { title:'Оцінювання', content: 'evaluation' },
         { title:'Результати', content: 'result' }
