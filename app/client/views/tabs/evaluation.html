@@ -16,9 +16,9 @@
                 <div ng-repeat="alternative in item.alternatives">
                     <span>{{alternative.name }}</span>
                     <i class="mark-icon" ng-class="{empty: (alternative.mark == setting.minValue), max: (alternative.mark == setting.maxValue)}">
-                        {{alternative.mark + (setting.percentages == 'true'? '%': '')}}
+                        {{alternative.mark + (expertise.setting.scale == 'percentages'? '%': '')}}
                     </i>
-                    <md-slider discrete ng-model="alternative.mark" step="1" min="{{setting.minValue}}" max="{{setting.maxValue}}" aria-label="{{alternative.name}}"></md-slider>
+                    <md-slider discrete ng-model="alternative.mark" step="{{expertise.setting.step}}" min="{{expertise.setting.minValue}}" max="{{expertise.setting.maxValue}}" aria-label="{{alternative.name}}"></md-slider>
                 </div>
             </accordion-group>
         </accordion>

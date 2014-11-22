@@ -9,6 +9,7 @@ angular.module('Expertise').
         $http.get("/api/marks/result/" + item._id).success(function (res) {
           $scope.marks = res.marks;
           $scope.usersMap = res.users;
+          var scale = $scope.expertise.setting.scale == 'percentages'? '%': '';
           $scope.resultMarks = $scope.expertise.criterions.map(function (value, index) {
             var index = index;
             return {
@@ -23,9 +24,9 @@ angular.module('Expertise').
                   users: $scope.marks.map(function (marks) {
                     var mark = marks.criterions[index].alternatives[i].mark;
                     sum += mark;
-                    return { mark: mark }
+                    return { mark: mark + scale }
                   }),
-                  sum: sum/$scope.marks.length
+                  sum: (sum/$scope.marks.length) + scale
                 }
               })
             }

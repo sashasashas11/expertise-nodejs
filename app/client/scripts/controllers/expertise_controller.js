@@ -28,13 +28,19 @@ angular.module('Expertise').
     $scope.show = function(item) {
       $scope.expertise = item;
       if (!$scope.expertise.setting)
-        $scope.expertise.setting = { minValue: 1, maxValue: 100, percentages: 'false' };
+        $scope.expertise.setting = { minValue: 1, maxValue: 100, scale: 'manual' };
 
       $scope.$watchCollection('expertise.setting', function(value) {
         var setting = $scope.expertise.setting;
-        if (setting && setting.percentages == "true") {
+        setting.step = 1;
+        if (setting && setting.scale == "percentages") {
           setting.minValue = 1;
           setting.maxValue = 100;
+        }
+        if (setting && setting.scale == "decimal") {
+          setting.step = 0.1;
+          setting.minValue = 0;
+          setting.maxValue = 1;
         }
         $timeout.cancel(timeout);
         timeout = $timeout(function () {
