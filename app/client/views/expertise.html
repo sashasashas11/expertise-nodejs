@@ -11,8 +11,11 @@
 
 <div class="col-md-9">
     <tabset ng-if="expertise">
-        <tab heading="{{ tab.title}}" ng-repeat="tab in tabs">
-            <div ng-include data-src="'views/tabs/' + tab.content + '.html'"></div>
+        <tab heading="Оцінювання">
+            <ng-include src="'views/tabs/evaluation.html'"></ng-include>
+        </tab>
+        <tab heading="Результати" ng-click="result(expertise)">
+            <ng-include src="'views/tabs/result.html'"></ng-include>
         </tab>
     </tabset>
 </div>

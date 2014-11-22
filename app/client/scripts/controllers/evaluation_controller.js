@@ -1,14 +1,37 @@
 'use strict';
 
 angular.module('Expertise').
-    controller('evaluationController', function ($scope, ExpertiseService, $mdToast, MarkService) {
+    controller('evaluationController', function ($scope, $http, ExpertiseService, $mdToast, MarkService) {
       $scope.expertise_list = ExpertiseService.query();
       $scope.evaluation = {};
       $scope.status = [ { open: true } ];
-      $scope.tabs = [
-        { title:'Оцінювання', content: 'evaluation' },
-        { title:'Результати', content: 'result' }
-      ];
+      $scope.result = function (item) {
+        $http.get("/api/marks/result/" + item._id).success(function (res) {
+          $scope.marks = res.marks;
+          $scope.usersMap = res.users;
+          $scope.resultMarks = $scope.expertise.criterions.map(function (value, index) {
+            var index = index;
+            return {
+              name: value.name,
+              users: $scope.marks.map(function (user) {
+                return $scope.usersMap[user.account];
+              }),
+              alternatives: $scope.expertise.alternatives.map(function (alternative, i) {
+                var sum = 0;
+                return {
+                  name: alternative.name,
+                  users: $scope.marks.map(function (marks) {
+                    var mark = marks.criterions[index].alternatives[i].mark;
+                    sum += mark;
+                    return { mark: mark }
+                  }),
+                  sum: sum/$scope.marks.length
+                }
+              })
+            }
+          });
+        });
+      };
 
       $scope.show = function(item) {
         $scope.expertise = item;

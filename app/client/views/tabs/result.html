@@ -1,1 +1,22 @@
-ffff
+<h2>Експертиза: {{expertise.name}}</h2>
+<span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+<h2 class="title-expertise-method">Результати оцінювання за методом нормування</h2>
+<table class="result-table" ng-repeat="result in resultMarks">
+    <caption>{{result.name}}</caption>
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Назва фактору</th>
+        <th ng-repeat="user in result.users">Експерт: {{user}}</th>
+        <th>Сума балів</th>
+    </tr>
+    <thody>
+        <tr ng-repeat="item in result.alternatives">
+            <th class="font-normal">{{$index + 1}}</th>
+            <th>{{item.name}}</th>
+            <th class="font-normal" ng-repeat="user in item.users">{{user.mark}}</th>
+            <th class="font-normal">{{item.sum}}</th>
+        </tr>
+    </thody>
+    </thead>
+</table>

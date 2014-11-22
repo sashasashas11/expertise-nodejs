@@ -19,6 +19,7 @@ module.exports = function (app) {
 //  MARK
   app.post ('/api/marks', authDefender.ensureAuthenticatedAsync, createMark);
   app.get ('/api/marks/:id', authDefender.ensureAuthenticatedAsync, getMark);
+  app.get ('/api/marks/result/:id', authDefender.ensureAuthenticatedAsync, getResultMarksByExpertise);
 
   function redirectRoot(req, res) {
     res.render('index.html');
@@ -31,6 +32,28 @@ module.exports = function (app) {
     MarkModel.findOne({account: account, expertise: objId}, function (err, result) {
       if (err) return  console.log(err);
       return res.send(result);
+    });
+  }
+
+  function getResultMarksByExpertise(req, res) {
+    var reqId = req.param('id');
+    var objId = mongoose.Types.ObjectId(reqId);
+
+    MarkModel.find({ expertise: objId }, { account: true, _id: false }, function (err, expertises) {
+      var userIds = [];
+      var usersMap = {};
+      expertises.forEach(function (obj) {
+        userIds.push(obj.account);
+      });
+      app.dbUser.find({ _id: { $in: userIds} }, {first_name: true, last_name: true}, function (err, users) {
+        users.forEach(function (obj) {
+          usersMap[obj._id] = obj.first_name + " " + obj.last_name;
+        });
+        console.log(usersMap);
+        MarkModel.find({ expertise: objId }, function (err, marks) {
+          return res.send({marks: marks, users: usersMap});
+        });
+      });
     });
   }
 
