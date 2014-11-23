@@ -6,7 +6,7 @@
     </div>
     <div ng-if="expertise_list.length == 0" class="alert-info welcome no-expertise">На жаль вам не дуступна ні одна експертиза</div>
     <ul class="list-group" ng-if="expertise_list.length != 0">
-        <h2>Список експертиз:</h2>
+        <h2>База анкет:</h2>
         <li class="list-group-item list-group-item-info list-expertise" ng-repeat="item in expertise_list" ng-click="show(item)">
             <span class="expertise-name">{{item.name}}</span>
             <i ng-click="removeExpertiseModalWindow(item)" class="glyphicon glyphicon-remove remove-expertise"></i>
