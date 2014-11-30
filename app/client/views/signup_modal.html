@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title">Реєстрація</h3>
+    <i class="icon-remove" ng-click='cancel()'></i>
+</div>
+<div class="modal-body">
+    <div ng-include data-src="'/views/shared/notify.html'"></div>
+
+    <form name="form" ng-submit="signup(user, form)" class="form-login {{notify.type}}" novalidate>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Ім'я" name="firstName" required autofocus focus ng-model="user.first_name">
+            <div ng-show="form.firstName.$error.required" class="error-message">Ім'я обов'язкове поле</div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Прізвище" name="lastName" required ng-model="user.last_name">
+            <div ng-show="form.lastName.$error.required" class="error-message">Прізвище обов'язкове полее</div>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Ел-Адрес" name="email" required ng-model="user.email">
+            <div ng-show="form.email.$error.required" class="error-message">Ел-Адрес обов'язкове поле</div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Пароль" name="password" required ng-model="user.password">
+        </div>
+        <button class="btn btn-lg btn-block" type="submit" ng-disabled="!form.$valid">Зареєструватися</button>
+    </form>
+</div>

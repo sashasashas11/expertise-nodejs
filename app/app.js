@@ -1,6 +1,9 @@
 // check for necessary startup parameters:
 var enVars = process.env;
 
+enVars.EXPERTISE_PORT = enVars.EXPERTISE_PORT || '3000';
+enVars.EXPERTISE_ENV = enVars.EXPERTISE_ENV || 'development';
+
 if (undefined === (process.env.NODE_ENV = enVars.EXPERTISE_ENV)) throw 'Env var EXPERTISE_ENV is undefined';
 if (undefined === enVars.EXPERTISE_PORT) throw 'Env var EXPERTISE_PORT is undefined';
 
@@ -13,9 +16,10 @@ var http        = require('http');
 var path        = require('path');
 var morgan      = require('morgan');      // log every request to the console
 
-//var passport    = require('passport');
+var passport    = require('passport');
+
 //var flash       = require('connect-flash');
-//var session     = require('express-session');
+var session     = require('express-session');
 var methodOverride = require('method-override'); // simulate DELETE and PUT
 
 exports = module.exports = global.gApp = app;
@@ -28,6 +32,7 @@ var appConfig = require('./config');
 appConfig.print();
 
 global.appConfig = appConfig.get();
+global.commons = appConfig.commons;
 global.rootDir = __dirname;
 
 // establish database connection:
@@ -35,37 +40,39 @@ var db = mongoose.createConnection(global.appConfig.dbUri);
 global.dbConnection = db;
 mongoose.set('debug', true);
 
-//app.dbAccount = require('./schemas/accountSchema')(db);
+
+app.dbUser = require('./db/models/userModel')(db);
+app.dbMethod = require('./db/models/methodModel')(db);
+app.dbExpertise = require('./db/models/expertiseModel')(db);
+app.dbMark = require('./db/models/markModel')(db);
+
+// Configure passport (Enable users authentication:)
+require('./passport.js')(app, passport);
 
 // configure Express web framework
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/client');
 
 app.set('title', 'Expertise');
-//app.use(bodyParser({limit: global.commons.bodyParserSizeLimit}));
+app.use(bodyParser({limit: global.commons.bodyParserSizeLimit}));
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.get ('/welcome', redirectRoot);
-
-function redirectRoot(req, res) {
-  res.render('index.html');
-}
 app.use(methodOverride());
 //app.use(flash());
 app.use(morgan(global.appConfig.logLevel));
-//app.use(session({ secret: 'my session secret', resave: true, saveUninitialized: true }));
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(session({ secret: 'my session secret', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Configure passport (Enable users authentication:)
-//require('./passport.js')(app, passport);
+
 
 // Setup Mailer
-//var mailer = require('./libs/mailer')(app);
+var mailer = require('./libs/mailer')(app);
 
 // mount server routes:
 require('./routes/resources')(app);
-//require('./routes/auth')(app, passport);
+require('./routes/expertises')(app);
+require('./routes/auth')(app, passport);
 
 
 // start main server

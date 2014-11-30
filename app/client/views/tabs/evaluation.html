@@ -1,0 +1,26 @@
+<div class="evaluation-page" layout-fill>
+    <h2>Експертиза: {{expertise.name}}</h2>
+    <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+
+    <h2 class="title-expertise-method">Оцінювання за методом нормування
+        <md-button class="btn-lg pull-right save-btn" ng-click="save(evaluation)">Зберегти результати</md-button>
+     </h2>
+    <ul>
+        <accordion close-others="oneAtATime">
+            <accordion-group is-open="status[$index].open" ng-repeat="item in evaluation.criterions">
+                <accordion-heading>
+                    <md-button class="criteria-name">{{item.criterionName}}
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status[$index].open, 'glyphicon-chevron-right': !status[$index].open}"></i>
+                    </md-button>
+                </accordion-heading>
+                <div ng-repeat="alternative in item.alternatives">
+                    <span>{{alternative.name }}</span>
+                    <i class="mark-icon" ng-class="{empty: (alternative.mark == setting.minValue), max: (alternative.mark == setting.maxValue)}">
+                        {{alternative.mark + (expertise.setting.scale == 'percentages'? '%': '')}}
+                    </i>
+                    <md-slider discrete ng-model="alternative.mark" step="{{expertise.setting.step}}" min="{{expertise.setting.minValue}}" max="{{expertise.setting.maxValue}}" aria-label="{{alternative.name}}"></md-slider>
+                </div>
+            </accordion-group>
+        </accordion>
+    </ul>
+</div>

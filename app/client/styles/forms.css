@@ -1,0 +1,52 @@
+.error-message {
+    position: absolute;
+    background-color: #cd5e63;
+    color: white;
+    margin-left: 7px;
+    padding: 1px 10px 3px;
+    display: none;
+    font-size: 12px;
+}
+
+div.text-area-block.description div.error-message {
+    margin-top: 0;
+}
+
+
+input.ng-dirty:focus+.error-message,
+input.ng-dirty:hover+.error-message,
+.css-form.submit-requested input:focus+.error-message,
+.css-form.submit-requested input:hover+.error-message,
+.css-form.submit-requested textarea:focus+.error-message,
+.css-form.submit-requested textarea:hover+.error-message,
+.css-form.submit-requested textarea.ng-dirty:focus+.error-message,
+.css-form.submit-requested textarea.ng-dirty:hover+.error-message {
+    display: block;
+    z-index: 1;
+}
+
+.css-form input.ng-invalid.ng-dirty,
+.css-form.submit-requested textarea.ng-invalid,
+.css-form.submit-requested input.ng-invalid {
+    border-color: #b94a48;
+}
+
+.css-form.submit-requested textarea.ng-invalid.ng-dirty:focus,
+.css-form.submit-requested textarea.ng-invalid:focus {
+    border-color: #953b39;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}
+
+.css-form input.ng-invalid.ng-dirty:focus,
+.css-form.submit-requested input.ng-invalid:focus {
+    border-color: #953b39;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}
+
+.equals-value-error {
+    font-size: 17px;
+    margin-left: 14px;
+}
+

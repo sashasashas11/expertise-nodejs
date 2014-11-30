@@ -1,0 +1,16 @@
+<h2>Експертиза: {{expertise.name}}</h2>
+<span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+<div class="form-group">
+    <label>Назва критерію
+        <input ng-model="criterion.name" class="form-control" type="text"/>
+    </label>
+    <button ng-click="addCriterion(criterion, expertise)" class="btn btn-success" ng-disabled="!criterion.name">Додати китерій</button>
+</div>
+<div class="criterions">
+    <ul><h2>Критерії:</h2>
+        <li ng-repeat="item in expertise.criterions">
+            {{item.name}}
+            <button ng-click="removeCriterion(item, expertise)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
+        </li>
+    </ul>
+</div>

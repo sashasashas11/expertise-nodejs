@@ -2,30 +2,50 @@
 <html ng-app="Expertise">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <title>Expertise</title>
+    <base href="/">
     <link rel="stylesheet" href="styles/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="lib/angular-material/angular-material.css">
+    <link rel="stylesheet" href="styles/forms.css">
+    <link rel="stylesheet" href="styles/notification.css">
     <link rel="stylesheet" href="styles/expertise.css">
 </head>
-<body>
-<div ng-view=""></div>
+<body ng-controller="mainController">
+<alert class="show-massages custom-massage-box" ng-show="alert" type="{{alert.type}}" close="closeAlert()" ng-bind="alert.msg"></alert>
+<div ui-view class="main-container"></div>
 
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-route/angular-route.js"></script>
 <script src="/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<script src="/lib/angular-resource/angular-resource.min.js"></script>
-<!--<script src="/lib/angular-sanitize/angular-sanitize.min.js"></script>-->
+<script src="/lib/angular-resource/angular-resource.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="lib/textAngular/dist/textAngular-sanitize.min.js"></script>
 <script src="lib/textAngular/dist/textAngular.min.js"></script>
 <script src="lib/angular-ui/build/angular-ui.js"></script>
+<script src="lib/angular-material/angular-material.js"></script>
+<script src="lib/angular-animate/angular-animate.js"></script>
+<script src="lib/angular-aria/angular-aria.js"></script>
+<script src="lib/hammerjs/hammer.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 
 
 <script src="/scripts/app.js"></script>
 <script src="/scripts/controllers/welcome_controller.js"></script>
-<!--<script src="../scripts/controllers/expertise_controller.js"></script>-->
+<script src="/scripts/controllers/main_controller.js"></script>
+<script src="/scripts/controllers/modal_window/login_ctrl.js"></script>
+<script src="/scripts/controllers/modal_window/signup_ctrl.js"></script>
+<script src="/scripts/controllers/modal_window/expertise_modal_ctrl.js"></script>
+<script src="/scripts/controllers/modal_window/delete_expertise_ctrl.js"></script>
+<script src="/scripts/controllers/expertise_controller.js"></script>
+<script src="/scripts/controllers/evaluation_controller.js"></script>
+<script src="/scripts/services/expertise_service.js"></script>
+<script src="/scripts/services/user_service.js"></script>
+<script src="/scripts/services/methods_service.js"></script>
+<script src="/scripts/services/expert_service.js"></script>
+<script src="/scripts/services/mark_service.js"></script>
+<script src="/scripts/factories/criterion_and_alternative.js"></script>
+<script src="/scripts/factories/modal_window_factory.js"></script>
 </body>
 </html>

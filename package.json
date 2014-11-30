@@ -73,6 +73,8 @@
     "supertest": "~0.13.0",
     "time": "~0.11.0",
     "time-grunt": "~0.3.1",
+    "nodemailer": "^0.7.0",
+    "email-templates": "^1.0.0",
     "validator": "~3.14.1"
   },
   "devDependencies": {}

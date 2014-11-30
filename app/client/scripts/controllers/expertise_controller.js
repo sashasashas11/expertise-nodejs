@@ -1,143 +1,90 @@
 'use strict';
 
-angular.module('expertise.controllers', []).
-	controller('expertiseController', function ($scope, $http, $cookieStore, $location, $cookies, $modal) {
-
-		$scope.expertise_list = [];
-		$scope.alnernative_list = [];
-		$scope.criterions = [];
+angular.module('Expertise').
+	controller('expertiseController', function ($scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction,
+                                              ModalWindowFactory, DeleteModalCtrl, $timeout, ExpertService) {
+    $scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
-
-		$http.get("/expertise.json").success(function(res){
-			$scope.expertise_list = res;
-		});
+    $scope.users = ExpertService.query();
+    $scope.status = [ { open: true } ];
 
 		$scope.tabs = [
-			{ title:'Альтернативи', content:'Dynamic content 1' },
-			{ title:'Критерії', content:'Dynamic content 2', disabled: true }
-		];
+      { title:'Альтернативи', content: 'alternative' },
+      { title:'Критерії', content: 'criterion' },
+      { title:'Експерти', content: 'experts' },
+      { title:'Оцінювання', content: 'evaluation_setting' }
+    ];
 
-		$scope.singOut = function () {
-			$cookieStore.remove('_expertise_session');
-			delete $cookies['_expertise_session'];
-			$location.path("/users/sign_in");
-			$http.delete('/users/sign_out').success(function() {
-				console.log('ok');
-			});
-		}
+    $scope.removeExpertise = function (expertise) {
+      ExpertiseService.delete({ id: expertise._id }, expertise, function (res) {
+        var index = $scope.expertise_list.indexOf(expertise);
+        $scope.expertise_list.splice(index, 1);
+        $scope.expertise = {};
+      });
+    };
 
-		$scope.add_expertise =function() {
-			$scope.show_expertise = true;
-		}
+    var timeout;
+    $scope.show = function(item) {
+      $scope.expertise = item;
+      if (!$scope.expertise.setting)
+        $scope.expertise.setting = { minValue: 1, maxValue: 100, scale: 'manual' };
 
-		$scope.add_alternative = function() {
-			$scope.show_form_expertise = true;
-		}
+      $scope.$watchCollection('expertise.setting', function(value) {
+        var setting = $scope.expertise.setting;
+        setting.step = 1;
+        if (setting && setting.scale == "percentages") {
+          setting.minValue = 1;
+          setting.maxValue = 100;
+        }
+        if (setting && setting.scale == "decimal") {
+          setting.step = 0.1;
+          setting.minValue = 0;
+          setting.maxValue = 1;
+        }
+        $timeout.cancel(timeout);
+        timeout = $timeout(function () {
+          ExpertiseService.update({ id: $scope.expertise._id }, $scope.expertise);
+        }, 1000);
+      });
+    };
 
-		$scope.addAlternative = function(name, expertise) {
-			$http.post('/alternatives', {name: name, expertise: expertise}).success(function(res) {
-				$scope.alnernative_list.push(res);
-				$scope.alternative.name =  "";
-			});
-		}
+		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
+    $scope.removeAlternative = ConstructorFunction('delete', $scope, 'alternative', 'alternatives');
+    $scope.addCriterion = ConstructorFunction('add', $scope, 'criterion', 'criterions');
+    $scope.removeCriterion = ConstructorFunction('delete', $scope, 'criterion', 'criterions');
 
-		$scope.removeAlternative = function(alternative) {
-			$http.delete('/alternatives/' + alternative.id).success(function(){
-				var index = $scope.alnernative_list.indexOf(alternative);
-				$scope.alnernative_list.splice(index, 1);
-			});
-		}
+    $scope.addExpert = function (expert, expertise) {
+      expert.expertises.push(expertise._id);
+      ExpertService.save({ id: expert._id }, {expertises: expert.expertises});
+    };
 
-		$scope.show = function(item) {
-			$http.get('/alternatives/' + item.id).success(function(res) {
-//				var index = $scope.expertise_list.indexOf(item);
-				$scope.alnernative_list = res;
-			});
+    $scope.deleteExpert = function (expert, expertise) {
+      var index = expert.expertises.indexOf(expertise._id);
+      expert.expertises.splice(index, 1);
+      ExpertService.save({ id: expert._id }, {expertises: expert.expertises});
+    };
 
-			$http.get('/criterions/' + item.id).success(function(res) {
-				$scope.criterions = res;
-			});
+    $scope.removeExpertiseModalWindow = function (expertise) {
+      var modalInstance = $modal.open({
+        templateUrl: 'views/delete_expertise_modal.html',
+        controller: DeleteModalCtrl,
+        resolve: {
+          deleteExpertise: function () { return $scope.removeExpertise; },
+          Expertise: function () { return expertise }
+        }
+      });
+    };
 
-			$scope.expertise = item;
-		}
-
-		$scope.removeExpertise = function (expertise) {
-			var index = $scope.expertise_list.indexOf(expertise);
-			$scope.expertise_list.splice(index, 1);
-			$http.delete('/expertizes/' + expertise.id + '.json').success(function(res) {
-				console.log(res);
-			});
-		}
-
-		$scope.editExpertise = function (expertise) {
+		$scope.expertiseModalWindow = function (expertise) {
 			var modalInstance = $modal.open({
-				templateUrl: 'templates/expertise_modal.html',
-				controller: expertiseEditModalCtrl,
+				templateUrl: 'views/expertise_modal.html',
+				controller: ExpertiseModalCtrl,
 				resolve: {
-					expertise: function () { return expertise; },
-					expertiseList: function () { return $scope.expertise_list; }
+					expertiseList: function () { return $scope.expertise_list; },
+          editExpertise: function () { return expertise }
 				}
 			});
 		};
-
-//		CRITERION BLOCK
-		$scope.addCriterion = function(name, expertise) {
-			$http.post('/criterions', {name: name, expertise: expertise}).success(function(res) {
-				$scope.criterions.push(res);
-				$scope.criterion.name = "";
-			});
-		}
-
-		$scope.removeCriterion = function(criterion) {
-			$http.delete('/criterions/' + criterion.id).success(function(){
-				var index = $scope.criterions.indexOf(criterion);
-				$scope.criterions.splice(index, 1);
-			});
-		}
-
-		$scope.openModalWindow = function () {
-			var modalInstance = $modal.open({
-				templateUrl: 'templates/expertise_modal.html',
-				controller: expertiseModalCtrl,
-				resolve: {
-					expertiseList: function () { return $scope.expertise_list; }
-				}
-			});
-		};
-
-		var expertiseEditModalCtrl = function ($scope, $modalInstance, expertiseList, expertise) {
-			$scope.expertise = angular.copy(expertise);
-			$scope.edit = true;
-
-			$scope.update = function(expertise) {
-				$http.put('/expertizes/'+expertise.id + ".json", {expertize:expertise}).success(function(res) {
-					var index = expertiseList.indexOf(expertise);
-					for (var i = 0; i<expertiseList.length; i++) {
-						if (expertiseList[i].id == expertise.id)
-							expertiseList[i] = expertise;
-					}
-					$scope.cancel();
-				});
-			}
-
-			$scope.cancel = function () {
-				$modalInstance.dismiss('cancel');
-			};
-		};
-
-		var expertiseModalCtrl = function ($scope, $modalInstance, expertiseList) {
-			$scope.save = function(expertise) {
-				$http.post("/expertizes.json", { name: expertise.name, goal: expertise.goal, method: "test" }).success(function(res){
-					expertiseList.push({ name: expertise.name, goal: expertise.goal });
-					$scope.cancel();
-				});
-			}
-
-			$scope.cancel = function () {
-				$modalInstance.dismiss('cancel');
-			};
-		};
-
 
 	});

@@ -1,5 +1,9 @@
 module.exports = {
 
+  commons: {
+    bodyParserSizeLimit: '50mb'
+  },
+
   // DEVELOP CONFIG ============================================
   development: {
     HostName: 'http://localhost:3000',
@@ -16,7 +20,7 @@ module.exports = {
    */
   test: {
     HostName: 'http://localhost:3000',
-    dbUri: 'mongodb://localhost/automizely_test',
+    dbUri: 'mongodb://localhost/expertise_test',
     logLevel: {}
   },
 

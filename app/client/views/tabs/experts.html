@@ -1,0 +1,26 @@
+<h2>Експертиза: {{expertise.name}}</h2>
+<span class="expertise-goal">Ціль: {{expertise.goal}}</span>
+ <table class="experts-table">
+     <thead>
+     <tr>
+         <th>Ім’я</th>
+         <th>Прізвище</th>
+         <th>Електронна адреса</th>
+         <th>Додати/Видалити</th>
+     </tr>
+     <thody>
+         <tr ng-if="users.length == 0">
+             <th><alert type="info">На жаль вам не доступний ні один експерт.</alert></th>
+         </tr>
+         <tr ng-repeat="item in users" ng-class="{added_expert: (item.expertises |filter:expertise._id).length}">
+             <th>{{item.first_name}}</th>
+             <th>{{item.last_name}}</th>
+             <th>{{item.email}}</th>
+             <th>
+                 <button ng-click="addExpert(item, expertise)" class="add-btn">Додати</button>
+                 <button ng-click="deleteExpert(item, expertise)" class="delete-btn">Видалити</button>
+             </th>
+         </tr>
+     </thody>
+     </thead>
+ </table>

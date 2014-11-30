@@ -1,16 +1,4 @@
-<header class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <nav class="collapse navbar-collapse">
-            <a id="logo" href="/welcome">EXPERTISE</a>
-            <ul class="nav navbar-nav pull-right">
-                <li><a href="#">Експертизи</a></li>
-                <li><a id="sign_out" href="#">Користувач</a></li>
-                <li><a href="#">Вхід</a></li>
-            </ul>
-        </nav>
-</div>
-</header>
-
+<div ng-include data-src="'views/shared/header.html'"></div>
 
 <div class="wrapper-home">
     <h1 class="title">Експертне оцінювання</h1>
@@ -19,7 +7,7 @@
     </p>
     <tabset vertical="true" type="pills" class="methods">
       <div ng-repeat="method in methods">
-        <div ng-switch on="method.children? 'notNull': 'null'">
+        <div ng-switch on="(method.children && method.children.length != 0)? 'notNull': 'null'">
             <span ng-switch-when="notNull">
                 <accordion close-others="oneAtATime" class="methods">
                     <accordion-group is-open="status.open">
@@ -28,23 +16,27 @@
                         </accordion-heading>
 
                         <tab heading="{{item.title}}" class="custom-tab" ng-repeat="item in method.children">
-                            <button ng-hide="editText$index" class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editText$index = true; tempText= item.text">&nbsp; Редагувати</button>
-                            <button ng-show="editText$index" class="btn btn-success glyphicon glyphicon-ok" ng-click="editText$index = false; updateMethod(item)">&nbsp; Зберегти</button>
-                            <button ng-show="editText$index" class="btn btn-danger glyphicon glyphicon-share-alt" ng-click="editText$index = false; item.text=tempText">&nbsp; Відміна</button>
-                            <div ng-if="!editText$index" ng-bind-html="item.text"></div>
+                            <div ng-if="user.isAdmin">
+                                <button ng-hide="editText[$index]" class="edit-btn" ng-click="editText[$index] = true; tempText= item.text">&nbsp; Редагувати</button>
+                                <button ng-show="editText[$index]" class="save-btn" ng-click="editText[$index] = false; updateMethod(item)">&nbsp; Зберегти</button>
+                                <button ng-show="editText[$index]" class="cancel-btn" ng-click="editText[$index] = false; item.text=tempText">&nbsp; Відміна</button>
+                            </div>
+                            <div ng-if="!editText[$index]" ng-bind-html="item.text"></div>
 
-                            <text-angular ng-show="editText$index" ng-model="item.text"></text-angular>
+                            <text-angular ng-show="editText[$index]" ng-model="item.text"></text-angular>
                         </tab>
                     </accordion-group>
                 </accordion>
             </span>
             <span ng-switch-when="null">
                 <tab heading="{{method.title}}" class="custom-tab">
-                    <button ng-hide="editText$index" class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editText$index = true">&nbsp; Редагувати</button>
-                    <button ng-show="editText$index" class="btn btn-success glyphicon glyphicon-ok" ng-click="editText$index = false; updateMethod(item)">&nbsp; Зберегти</button>
-                    <button ng-show="editText$index" class="btn btn-danger glyphicon glyphicon-share-alt" ng-click="editText$index = false; item.text=tempText">&nbsp; Відміна</button>
-                    <div ng-if="!editText$index" ng-bind-html="method.text"></div>
-                    <text-angular ng-show="editText$index" ng-model="item.text"></text-angular>
+                    <div ng-if="user.isAdmin">
+                        <button ng-hide="editText[$index]" class="edit-btn" ng-click="editText[$index] = true; tempText= method.text">&nbsp; Редагувати</button>
+                        <button ng-show="editText[$index]" class="save-btn" ng-click="editText[$index] = false; updateMethod(method)">&nbsp; Зберегти</button>
+                        <button ng-show="editText[$index]" class="cancel-btn" ng-click="editText[$index] = false; method.text=tempText">&nbsp; Відміна</button>
+                    </div>
+                    <div ng-if="!editText[$index]" ng-bind-html="method.text"></div>
+                    <text-angular ng-show="editText[$index]" ng-model="method.text"></text-angular>
                 </tab>
             </span>
         </div>
