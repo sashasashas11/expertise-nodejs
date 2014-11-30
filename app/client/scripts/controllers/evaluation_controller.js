@@ -26,7 +26,7 @@ angular.module('Expertise').
                     sum += mark;
                     return { mark: mark + scale }
                   }),
-                  sum: (sum/$scope.marks.length) + scale
+                  sum: (Number(sum/$scope.marks.length).toFixed(2)) + scale
                 }
               })
             }
