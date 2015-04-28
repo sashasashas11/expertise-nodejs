@@ -5,14 +5,14 @@ var mainApp = require("./_")();
 *   password: 1
 *
 * */
-EMAIL = "1@1";
+EMAIL = "11@1";
 PASSW = "1";
-FIRST_NAME = "John";
-LAST_NAME = "Smith";
+FIRST_NAME = "Admin";
+LAST_NAME = "";
 
 var methodsJson = require('./../app/methods.json');
 
-mainApp.dbAccount.register(new mainApp.dbAccount({ email: EMAIL, first_name: FIRST_NAME, last_name: LAST_NAME, active: true}), PASSW, function (err, account) {
+mainApp.dbAccount.register(new mainApp.dbAccount({ email: EMAIL, first_name: FIRST_NAME, last_name: LAST_NAME, active: true, isAdmin: true}), PASSW, function (err, account) {
   if (err) {
     console.log(err);
     process.exit(0)
