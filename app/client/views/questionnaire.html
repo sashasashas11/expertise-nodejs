@@ -4,7 +4,7 @@
     <div class="block-menu" ng-if="user.isAdmin">
         <button ng-click="expertiseModalWindow()" class="add-expertise-btn">&nbsp;Додати анкету</button>
     </div>
-    <div ng-if="expertise_list.length == 0" class="alert-info welcome no-expertise">На жаль вам не доступна ні одна експертиза</div>
+    <div ng-if="expertise_list.length == 0" class="alert-info welcome no-expertise">На жаль вам не доступна ні одна анкета</div>
     <ul class="list-group" ng-if="expertise_list.length != 0">
         <h2>База анкет:</h2>
         <li class="list-group-item list-group-item-info list-expertise" ng-repeat="item in expertise_list" ng-click="show(item)">
