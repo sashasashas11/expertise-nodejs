@@ -49,7 +49,7 @@ angular.module('Expertise').controller('expertiseController',
       });
     };
 
-		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
+    $scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
     $scope.removeAlternative = ConstructorFunction('delete', $scope, 'alternative', 'alternatives');
     $scope.addCriterion = ConstructorFunction('add', $scope, 'criterion', 'criterions');
     $scope.removeCriterion = ConstructorFunction('delete', $scope, 'criterion', 'criterions');
@@ -75,6 +75,10 @@ angular.module('Expertise').controller('expertiseController',
         $scope.removeExpertise(expertise)
       })
     };
+
+
+
+
 
 		$scope.expertiseModalWindow = function (expertise) {
 			var modalInstance = $modal.open({

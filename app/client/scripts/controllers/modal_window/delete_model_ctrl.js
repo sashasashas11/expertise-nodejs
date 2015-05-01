@@ -1,12 +1,12 @@
-angular.module('Expertise').controller('DeleteModalCtrl', function($scope, $modalInstance, item) {
-    $scope.item = item;
+angular.module('Expertise').controller('DeleteModalCtrl', function($scope, $modalInstance, Expertise) {
+    $scope.expertise = Expertise;
 
-    $scope.delete = function () {
-      $modalInstance.close($scope.item);
+    $scope.delete = function (expertise) {
+        $modalInstance.close(expertise);
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+        $modalInstance.dismiss('cancel');
     };
 });
 
