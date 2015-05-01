@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('Expertise').
-	controller('expertiseController', function ($scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction,
-                                              ModalWindowFactory, DeleteModalCtrl, $timeout, ExpertService) {
+angular.module('Expertise').controller('expertiseController',
+      function ($scope, $modal, ExpertiseService, ConstructorFunction, $timeout, ExpertService) {
+
     $scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
@@ -68,18 +68,18 @@ angular.module('Expertise').
     $scope.removeExpertiseModalWindow = function (expertise) {
       var modalInstance = $modal.open({
         templateUrl: 'views/delete_expertise_modal.html',
-        controller: DeleteModalCtrl,
-        resolve: {
-          deleteExpertise: function () { return $scope.removeExpertise; },
-          Expertise: function () { return expertise }
-        }
+        controller: 'DeleteModalCtrl',
+        resolve: { Expertise: function () { return expertise } }
       });
+      modalInstance.result.then(function(expertise) {
+        $scope.removeExpertise(expertise)
+      })
     };
 
 		$scope.expertiseModalWindow = function (expertise) {
 			var modalInstance = $modal.open({
 				templateUrl: 'views/expertise_modal.html',
-				controller: ExpertiseModalCtrl,
+				controller: 'ExpertiseModalCtrl',
 				resolve: {
 					expertiseList: function () { return $scope.expertise_list; },
           editExpertise: function () { return expertise }

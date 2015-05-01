@@ -1,15 +1,12 @@
-angular.module('Expertise')
-    .factory('DeleteModalCtrl', function() {
-      return function($scope, $modalInstance, $http, $location, Expertise, deleteExpertise) {
-        $scope.expertise = Expertise;
-        $scope.delete = function (expertise) {
-          deleteExpertise(expertise);
-          $scope.cancel();
-        };
+angular.module('Expertise').controller('DeleteModalCtrl', function($scope, $modalInstance, Expertise) {
+    $scope.expertise = Expertise;
 
-        $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-        };
-      }
-    });
+    $scope.delete = function (expertise) {
+      $modalInstance.close(expertise);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+});
 

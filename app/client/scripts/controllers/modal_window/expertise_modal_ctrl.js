@@ -1,6 +1,5 @@
-angular.module('Expertise')
-    .factory('ExpertiseModalCtrl', function() {
-      return function ($scope, $modalInstance, expertiseList, editExpertise, ExpertiseService, MethodsService) {
+angular.module('Expertise').controller('ExpertiseModalCtrl',
+    function($scope, $modalInstance, expertiseList, editExpertise, ExpertiseService) {
         $scope.methods = [
           {name: "Метод аналізу співвідношень"},
           {name: "Метод нормування"},
@@ -41,5 +40,4 @@ angular.module('Expertise')
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
-      }
     });

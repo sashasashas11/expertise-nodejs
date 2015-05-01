@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('Expertise').
-    controller('mainController', function ($rootScope, $scope, $http, ModalWindowFactory, $timeout, SignupModalCtrl, LoginModalCtrl, UserService) {
+    controller('mainController', function ($rootScope, $scope, $modal, $http, ModalWindowFactory, $timeout, UserService) {
 
-      $rootScope.loginModelOpen = ModalWindowFactory('login', LoginModalCtrl);
-      $rootScope.signupModelOpen = ModalWindowFactory('signup', SignupModalCtrl);
+      $rootScope.loginModelOpen = ModalWindowFactory('login', 'LoginModalCtrl');
+      $rootScope.signupModelOpen =  ModalWindowFactory('signup', 'SignupModalCtrl');
 
       $http.get("/authenticate").success(function (res) {
         if (res.status)
