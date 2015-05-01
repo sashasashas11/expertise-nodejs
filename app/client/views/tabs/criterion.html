@@ -10,7 +10,7 @@
     <ul><h2>Критерії:</h2>
         <li ng-repeat="item in expertise.criterions">
             {{item.name}}
-            <button ng-click="removeCriterion(item, expertise)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
+            <button ng-click="removeCriterionModalWindow(item)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
         </li>
     </ul>
 </div>

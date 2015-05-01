@@ -1,8 +1,8 @@
-angular.module('Expertise').controller('DeleteModalCtrl', function($scope, $modalInstance, Expertise) {
-    $scope.expertise = Expertise;
+angular.module('Expertise').controller('DeleteModalCtrl', function($scope, $modalInstance, item) {
+    $scope.item = item;
 
-    $scope.delete = function (expertise) {
-        $modalInstance.close(expertise);
+    $scope.delete = function () {
+        $modalInstance.close($scope.item)
     };
 
     $scope.cancel = function () {

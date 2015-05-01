@@ -76,11 +76,32 @@ angular.module('Expertise').controller('expertiseController',
       })
     };
 
+          $scope.removeAlternativeModalWindow = function (alternative) {
+              var modalInstance = $modal.open({
+                  templateUrl: 'views/delete_alternative_modal.html',
+                  controller: 'DeleteModalCtrl',
+                  resolve: { item: function () { return alternative} }
+              });
+              modalInstance.result.then(function(alternative) {
+                  $scope.removeAlternative(alternative, $scope.expertise)
+              })
+          };
+
+          $scope.removeCriterionModalWindow = function (criterion) {
+              var modalInstance = $modal.open({
+                  templateUrl: 'views/delete_criterion_modal.html',
+                  controller: 'DeleteModalCtrl',
+                  resolve: { item: function () { return criterion} }
+              });
+              modalInstance.result.then(function(criterion) {
+                  $scope.removeCriterion (criterion, $scope.expertise)
+              })
+          };
 
 
 
 
-		$scope.expertiseModalWindow = function (expertise) {
+          $scope.expertiseModalWindow = function (expertise) {
 			var modalInstance = $modal.open({
 				templateUrl: 'views/expertise_modal.html',
 				controller: 'ExpertiseModalCtrl',

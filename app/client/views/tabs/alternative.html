@@ -11,7 +11,7 @@
         <h2 ng-show="expertise.alternatives">Альтернативи:</h2>
         <li ng-repeat="item in expertise.alternatives">
             {{item.name}}
-            <button ng-click="removeAlternative(item, expertise)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
+            <button ng-click="removeAlternativeModalWindow(item)" class="btn btn-danger glyphicon glyphicon-trash remove"></button>
         </li>
     </ul>
 </div>
