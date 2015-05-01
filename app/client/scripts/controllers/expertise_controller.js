@@ -69,7 +69,7 @@ angular.module('Expertise').controller('expertiseController',
       var modalInstance = $modal.open({
         templateUrl: 'views/delete_expertise_modal.html',
         controller: 'DeleteModalCtrl',
-        resolve: { Expertise: function () { return expertise } }
+        resolve: { item: function () { return expertise } }
       });
       modalInstance.result.then(function(expertise) {
         $scope.removeExpertise(expertise)
