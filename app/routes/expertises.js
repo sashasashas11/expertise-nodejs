@@ -49,7 +49,9 @@ module.exports = function (app) {
     var reqId = req.param('id');
     var objId = mongoose.Types.ObjectId(reqId);
 
-    var attrHash = req.body;
+    var alternatives = req.body.alternatives;
+    var criterions = req.body.criterions;
+    var attrHash = {alternatives: alternatives, criterions: criterions};
     var account = attrHash.account;
     var acc = authDefender.getCurrentUser(req);
 
