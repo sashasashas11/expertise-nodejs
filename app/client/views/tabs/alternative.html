@@ -1,12 +1,12 @@
 <h2>Експертиза: {{expertise.name}}</h2>
 <span class="expertise-goal">Ціль: {{expertise.goal}}</span>
 <div class="form-group">
-    <form ng-submit="addAlternative(alternative, expertise)">
+    <form ng-submit="addAlternative(alternative, expertise)" class="form-login {{notify.type}}" novalidate>
     <label>Назва альтернативи
         <input ng-model="alternative.name" class="form-control" type="text"/>
     </label>
     </form>
-    <button ng-click="addAlternative(alternative, expertise)" class="btn btn-success" ng-disabled="!alternative.name">Додати альтернативу</button>
+    <button ng-click="addAlternative(alternative, expertise)" class="btn btn-success" ngsabled="!alternative.name"-di>Додати альтернативу</button>
 
 </div>
 <div class="criterions">
