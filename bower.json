@@ -27,6 +27,7 @@
     "ng-ckeditor": "~0.2.1",
     "textAngular": "~1.2.1",
     "angular-material": "~0.4.2",
-    "angular-ui-router": "~0.2.13"
+    "angular-ui-router": "~0.2.13",
+    "lodash": "~3.8.0"
   }
 }
