@@ -1,7 +1,7 @@
 var mainApp = require("./_")();
 /*
 * Create registered account with:
-*   email:    1@1
+*   email:    11@1
 *   password: 1
 *
 * */
