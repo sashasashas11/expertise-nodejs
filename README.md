@@ -95,6 +95,7 @@ use expertise_dev
 12.Run scripts for write in DB.
 
 ```
+cd expertise-nodejs
 node bin/mindb.js
 node bin/method_db.js
 ```
