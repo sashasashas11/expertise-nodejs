@@ -12,13 +12,13 @@ users for expert analysis of real problems and issues in business and education.
 
 Installation
 -----------
-Install -- `git` and -- `git gui`
+Install `git` and `git gui`
 
 ```
 sudo apt-get install git
 sudo apt-get install git-gui
 ```
-Check -- `git` version
+Check `git` version
 
 ```
 git --version
