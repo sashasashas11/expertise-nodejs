@@ -25,8 +25,16 @@ sudo apt-get install git-gui
 ssh-keygen -t rsa -C "git@github.com"
 ```
 
-3.Add ssh-key on github (https://github.com/settings/ssh).Open your ssh-key.Copy text from file and add on github.
+3.Add ssh-key on github (https://github.com/settings/ssh). Open your ssh-key.Copy text from file and add on github.
 
 ```
 gedit ~/.ssh/id_rsa.pub
+```
+
+4.Clone project and go to branch develop.
+
+```
+git clone git@github.com:sashasashas11/expertise-nodejs.git
+cd expertise-nodejs
+git checkout develop
 ```
