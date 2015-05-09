@@ -12,14 +12,28 @@ users for expert analysis of real problems and issues in business and education.
 
 Installation
 -----------
-0. Install `git` and `git gui`
+0. Install `git` and `git gui`.
 
 ```
 sudo apt-get install git
 sudo apt-get install git-gui
 ```
-Check `git` version
+Check `git` version.
 
 ```
 git --version
 ```
+
+0. Generate  ssh-key.
+
+```
+ssh-keygen -t rsa -C "git@github.com"
+```
+
+Add ssh-key on github (https://github.com/settings/ssh).
+Open your ssh-key.
+
+```
+gedit ~/.ssh/id_rsa.pub
+```
+Copy text from file and add on github.
