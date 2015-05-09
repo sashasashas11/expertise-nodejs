@@ -99,8 +99,13 @@ node bin/mindb.js
 node bin/method_db.js
 ```
 
-13.Run project ( run script and open (http://localhost:3000/)).
+Run project
+-----------
+
+1.Run script.
 
 ```
 node app/app.js
 ```
+
+2.Open (http://localhost:3000/).
