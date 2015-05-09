@@ -1,18 +1,18 @@
 expertise-nodejs
 ================
 
-    Installation
-    -----------
-        Install Git and Git gui
+Installation
+-----------
+Install Git and Git gui
 
-        ```
-        sudo apt-get install git
-        sudo apt-get install git-gui
+```
+sudo apt-get install git
+sudo apt-get install git-gui
 
-        ```
-        Check Git version
+```
+Check Git version
 
-        ```
-        git --version
+```
+git --version
 
-        ```
+```
