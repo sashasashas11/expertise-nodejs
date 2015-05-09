@@ -108,4 +108,4 @@ Run project
 node app/app.js
 ```
 
-2.Open (https://github.com/settings/ssh).
+2.Open (http://localhost:3000/welcome).
