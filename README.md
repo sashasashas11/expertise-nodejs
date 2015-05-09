@@ -12,7 +12,7 @@ users for expert analysis of real problems and issues in business and education.
 
 Installation
 -----------
-1.Install `git` and `git gui`.
+1.Install git and git gui.
 
 ```
 sudo apt-get install git
@@ -25,7 +25,7 @@ sudo apt-get install git-gui
 ssh-keygen -t rsa -C "git@github.com"
 ```
 
-3.Add ssh-key on github (https://github.com/settings/ssh). Open your ssh-key.Copy text from file and add on github.
+3.Add ssh-key on github (https://github.com/settings/ssh). Open your ssh-key. Copy text from file and add on github.
 
 ```
 gedit ~/.ssh/id_rsa.pub
@@ -37,4 +37,70 @@ gedit ~/.ssh/id_rsa.pub
 git clone git@github.com:sashasashas11/expertise-nodejs.git
 cd expertise-nodejs
 git checkout develop
+```
+
+5.Install Node.js and check version.
+
+```
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+nodejs -v
+```
+
+6.Install MongoDB.
+
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo apt-get install -y mongodb-org=3.0.2 mongodb-org-server=3.0.2 mongodb-org-shell=3.0.2 mongodb-org-mongos=3.0.2 mongodb-org-tools=3.0.2
+```
+
+7.Install Bower.
+
+```
+sudo npm install bower -g
+```
+
+8.Install nmp.
+
+```
+cd expertise-nodejs
+npm install
+```
+
+9.Install bower-lib (select 6).
+
+```
+cd expertise-nodejs
+bower install
+```
+
+10.Register environment variables.
+
+```
+export EXPERTISE_PORT=3000
+EXPERTISE_ENV=development
+```
+
+11.Create DB.
+
+```
+mongo
+use expertise_dev
+```
+
+12.Run scripts for write in DB.
+
+```
+node bin/mindb.js
+node bin/method_db.js
+```
+
+13.Run project ( run script and open http://localhost:3000/ ).
+
+```
+node app/app.js
 ```
