@@ -76,7 +76,7 @@ cd expertise-nodejs
 npm install
 ```
 
-9.Install bower-lib .
+9.Install Bower libs .
 
 ```
 cd expertise-nodejs
