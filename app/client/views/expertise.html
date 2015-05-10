@@ -1,6 +1,6 @@
 <div ng-include data-src="'views/shared/header.html'"></div>
 <div class="col-md-3">
-    <div ng-if="expertise_list.length == 0" class="alert-info welcome no-expertise">На жаль вам не дуступна ні одна експертиза</div>
+    <div ng-if="expertise_list.length == 0" class="alert-info welcome no-expertise">На жаль вам не доступна ні одна експертиза</div>
     <ul class="list-group" ng-if="expertise_list.length != 0">
         <h2>Виберіть експертизу для оцінювання:</h2>
         <li class="list-group-item list-group-item-info list-expertise" ng-repeat="item in expertise_list" ng-click="show(item)">

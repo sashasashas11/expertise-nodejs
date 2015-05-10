@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('Expertise').
-	controller('expertiseController', function ($scope, $modal, ExpertiseModalCtrl, ExpertiseService, ConstructorFunction,
-                                              ModalWindowFactory, DeleteModalCtrl, $timeout, ExpertService) {
+angular.module('Expertise').controller('expertiseController',
+      function ($scope, $modal, ExpertiseService, ConstructorFunction, $timeout, ExpertService, DeleteModalFactory) {
+
     $scope.expertise_list = ExpertiseService.query();
 		$scope.criterion = {};
 		$scope.alternative = {};
@@ -49,7 +49,7 @@ angular.module('Expertise').
       });
     };
 
-		$scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
+    $scope.addAlternative = ConstructorFunction('add', $scope, 'alternative', 'alternatives');
     $scope.removeAlternative = ConstructorFunction('delete', $scope, 'alternative', 'alternatives');
     $scope.addCriterion = ConstructorFunction('add', $scope, 'criterion', 'criterions');
     $scope.removeCriterion = ConstructorFunction('delete', $scope, 'criterion', 'criterions');
@@ -65,21 +65,22 @@ angular.module('Expertise').
       ExpertService.save({ id: expert._id }, {expertises: expert.expertises});
     };
 
-    $scope.removeExpertiseModalWindow = function (expertise) {
-      var modalInstance = $modal.open({
-        templateUrl: 'views/delete_expertise_modal.html',
-        controller: DeleteModalCtrl,
-        resolve: {
-          deleteExpertise: function () { return $scope.removeExpertise; },
-          Expertise: function () { return expertise }
-        }
-      });
-    };
+    $scope.removeExpertiseModalWindow = DeleteModalFactory('expertise', function (expertise) {
+      $scope.removeExpertise(expertise);
+    });
 
-		$scope.expertiseModalWindow = function (expertise) {
-			var modalInstance = $modal.open({
+    $scope.removeAlternativeModalWindow = DeleteModalFactory('alternative', function (alternative) {
+       $scope.removeAlternative(alternative, $scope.expertise);
+    });
+
+    $scope.removeCriterionModalWindow = DeleteModalFactory('criterion', function (criterion) {
+      $scope.removeCriterion (criterion, $scope.expertise);
+    });
+
+    $scope.expertiseModalWindow = function (expertise) {
+			$modal.open({
 				templateUrl: 'views/expertise_modal.html',
-				controller: ExpertiseModalCtrl,
+				controller: 'ExpertiseModalCtrl',
 				resolve: {
 					expertiseList: function () { return $scope.expertise_list; },
           editExpertise: function () { return expertise }

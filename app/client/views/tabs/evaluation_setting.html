@@ -4,9 +4,9 @@
     <md-whiteframe class="md-whiteframe-z4" layout layout-align="center center">
         <h3>Налаштування шкали оцінювання:</h3>
         <md-radio-group ng-model="expertise.setting.scale">
+            <md-radio-button value="decimal">Шкала оцінювання в діапазоні від 0 до 1</md-radio-button>
             <md-radio-button value="percentages" aria-label="Label 1">У відсотках</md-radio-button>
             <md-radio-button value="manual">Шкала оцінювання</md-radio-button>
-            <md-radio-button value="decimal">Шкала оцінювання в діапазоні від 0 до 1</md-radio-button>
         </md-radio-group>
         <md-input-group ng-disabled="expertise.setting.scale != 'manual'">
             <label for="i1">Від</label>
