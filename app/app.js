@@ -15,7 +15,6 @@ var bodyParser  = require('body-parser'); // pull information from html in POST
 var http        = require('http');
 var path        = require('path');
 var morgan      = require('morgan');      // log every request to the console
-
 var passport    = require('passport');
 
 //var flash       = require('connect-flash');
@@ -45,6 +44,7 @@ app.dbUser = require('./db/models/userModel')(db);
 app.dbMethod = require('./db/models/methodModel')(db);
 app.dbExpertise = require('./db/models/expertiseModel')(db);
 app.dbMark = require('./db/models/markModel')(db);
+app.dbQuestionnaire = require('./db/models/questionnaireModel')(db);
 
 // Configure passport (Enable users authentication:)
 require('./passport.js')(app, passport);
