@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">Створити анкету</h3>
+    <i class="icon-remove" ng-click='cancel()'></i>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label>Назва анкети
+            <input ng-model="expertise.name" class="form-control" type="text"/></label>
+    </div>
+    <div class="form-group">
+        <label>Ціль
+            <textarea class="form-control" ng-model="expertise.goal" rows="3"></textarea></label>
+    </div>
+    <div class="form-group">
+        <label>Метод</label>
+        <select ng-model="expertise.method" ng-options="method.name for method in methods" ng-init="expertise.method = methods[methodIndex]"></select>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-hide="edit" ng-click="save(expertise)" class="btn btn-success" ng-disabled="!expertise.name||!expertise.goal||!expertise.method">Створити</button>
+    <button ng-show="edit" ng-click="update(expertise)" class="btn btn-success">Зберегти</button>
+    <button class="btn btn-warning" ng-click="cancel()">Відміна</button>
+</div>
