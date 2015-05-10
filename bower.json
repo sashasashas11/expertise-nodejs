@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "homepage": "https://github.com/sashasashas11/expertise-nodejs",
   "authors": [
-    "OJIEHb <geiko2012@yandex.ru>"
+    "OJIEHb <geiko2012@yandex.ru>",
+    "zanctor <1tshark1@mail.ru>"
   ],
   "license": "MIT",
   "ignore": [
