@@ -1,3 +1,6 @@
-/**
- * Created by andrey on 10.05.15.
- */
+'use strict';
+
+angular.module('Expertise').controller('questionaryController', function ($scope, questionaryService) {
+    $scope.questionary = questionaryService.query();
+
+    });
