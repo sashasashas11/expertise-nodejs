@@ -87,5 +87,4 @@ angular.module('Expertise').controller('expertiseController',
 				}
 			});
 		};
-
 	});
