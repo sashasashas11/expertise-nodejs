@@ -27,4 +27,10 @@ angular.module('Expertise', [
             templateUrl: "views/questionnaire.html",
             controller: "expertiseController"
           })
+          .state('questionary', {
+              url: "/questionary",
+              templateUrl: "views/questionary.html",
+              controller: "questionaryController"
+          })
+
     });
