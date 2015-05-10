@@ -56,7 +56,9 @@ echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
+
 or use
+
 ```
 sudo apt-get install -y mongodb-org=3.0.2 mongodb-org-server=3.0.2 mongodb-org-shell=3.0.2 mongodb-org-mongos=3.0.2 mongodb-org-tools=3.0.2
 ```
@@ -67,7 +69,7 @@ sudo apt-get install -y mongodb-org=3.0.2 mongodb-org-server=3.0.2 mongodb-org-s
 sudo npm install bower -g
 ```
 
-8.Install nmp.
+8.Install npm.
 
 ```
 cd expertise-nodejs
@@ -85,7 +87,7 @@ bower install
 
 ```
 export EXPERTISE_PORT=3000
-EXPERTISE_ENV=development
+export EXPERTISE_ENV=development
 ```
 
 11.Create DB.
@@ -112,4 +114,4 @@ Run project
 node app/app.js
 ```
 
-2.Open (http://localhost:3000/welcome).
+2.Open (http://localhost:3000).
