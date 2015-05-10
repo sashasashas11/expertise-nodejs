@@ -100,13 +100,13 @@ node bin/mindb.js
 node bin/method_db.js
 ```
 
-Run project
+Run application
 -----------
 
-1.Run script.
+1.Start server.
 
 ```
 node app/app.js
 ```
 
-2.Open (http://localhost:3000).
+2.Open [http://localhost:3000](http://localhost:3000).
