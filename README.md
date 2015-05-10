@@ -64,14 +64,14 @@ sudo apt-get install -y mongodb-org=3.0.2 mongodb-org-server=3.0.2 mongodb-org-s
 sudo npm install bower -g
 ```
 
-8.Install nmp.
+8.Install npm.
 
 ```
 cd expertise-nodejs
 npm install
 ```
 
-9.Install bower-lib .
+9.Install Bower libs .
 
 ```
 cd expertise-nodejs
@@ -82,7 +82,7 @@ bower install
 
 ```
 export EXPERTISE_PORT=3000
-EXPERTISE_ENV=development
+export EXPERTISE_ENV=development
 ```
 
 11.Create DB.
@@ -100,13 +100,13 @@ node bin/mindb.js
 node bin/method_db.js
 ```
 
-Run project
+Run application
 -----------
 
-1.Run script.
+1.Start server.
 
 ```
 node app/app.js
 ```
 
-2.Open (http://localhost:3000/welcome).
+2.Open [http://localhost:3000](http://localhost:3000).
