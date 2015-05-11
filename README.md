@@ -68,7 +68,7 @@ sudo npm install bower -g
 
 ```
 cd expertise-nodejs
-npm install
+sudo npm install
 ```
 
 9.Install Bower libs .
@@ -92,7 +92,7 @@ mongo
 use expertise_dev
 ```
 
-12.Run scripts for write in DB.
+12.Run scripts for filling DB.
 
 ```
 cd expertise-nodejs

@@ -8,7 +8,7 @@ angular.module('Expertise').
 
       $http.get("/authenticate").success(function (res) {
         if (res.status)
-          $rootScope.user = UserService.get();
+          $rootScope.currentUser = UserService.get();
       });
 
       $rootScope.messageBox = function (msg, type) {

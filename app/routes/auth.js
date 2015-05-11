@@ -197,10 +197,12 @@ module.exports = function (app) {
 
 
   function processSignup(req, res) {
+    var md5 = requires('MD5');
+    var passwrd = md5(new Date().getDate());
     var email = req.body.email,
       first_name = req.body.first_name,
       last_name = req.body.last_name,
-        password = req.body.password;
+        password = passwrd;
     if (password.length < PASSWORD_MIN_LENGTH) return errorRequest(res, SIGNUP_ERR_PASSWORD_TOO_SHORT);
     if (!first_name) return errorRequest(res, SIGNUP_ERR_FIRST_NAME_REQUIRED);
     if (!last_name) return errorRequest(res, SIGNUP_ERR_LAST_NAME_REQUIRED);
@@ -228,8 +230,9 @@ module.exports = function (app) {
             , protocol = "http://"
             , curHost = req.get('host');
 
+
           var confirmationLink = protocol + curHost + CONFIRMATION_LINK.replace('_TOKEN_', acc.confirmEmailToken);
-          mailer.sendConfirmationEmail({to: acc.email, firstName:  acc.first_name, confirmationLink: confirmationLink});
+          mailer.sendConfirmationEmail({to: acc.email, firstName:  acc.first_name, confirmationLink: confirmationLink, password: passwrd});
           return res.send({success :SIGNUP_SUCCESS.replace("[EMAIL]", email), email: email});
         });
       }

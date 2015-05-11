@@ -12,7 +12,7 @@ angular.module('Expertise').controller('LoginModalCtrl', function($rootScope, $s
   $scope.user = {};
   $scope.login = function (user, form) {
     $http.post('/login', user).success(function (res) {
-      $rootScope.user = UserService.get();
+      $rootScope.currentUser = UserService.get();
       $scope.cancel();
     })
     .error(function (res) {

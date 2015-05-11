@@ -16,7 +16,7 @@
                         </accordion-heading>
 
                         <tab heading="{{item.title}}" class="custom-tab" ng-repeat="item in method.children">
-                            <div ng-if="user.isAdmin">
+                            <div ng-if="currentUser.isAdmin">
                                 <button ng-hide="editText[$index]" class="edit-btn" ng-click="editText[$index] = true; tempText= item.text">&nbsp; Редагувати</button>
                                 <button ng-show="editText[$index]" class="save-btn" ng-click="editText[$index] = false; updateMethod(item)">&nbsp; Зберегти</button>
                                 <button ng-show="editText[$index]" class="cancel-btn" ng-click="editText[$index] = false; item.text=tempText">&nbsp; Відміна</button>
@@ -30,7 +30,7 @@
             </span>
             <span ng-switch-when="null">
                 <tab heading="{{method.title}}" class="custom-tab">
-                    <div ng-if="user.isAdmin">
+                    <div ng-if="currentUser.isAdmin">
                         <button ng-hide="editText[$index]" class="edit-btn" ng-click="editText[$index] = true; tempText= method.text">&nbsp; Редагувати</button>
                         <button ng-show="editText[$index]" class="save-btn" ng-click="editText[$index] = false; updateMethod(method)">&nbsp; Зберегти</button>
                         <button ng-show="editText[$index]" class="cancel-btn" ng-click="editText[$index] = false; method.text=tempText">&nbsp; Відміна</button>
@@ -43,5 +43,5 @@
       </div>
 </tabset>
 
-    <p class="alert-success welcome">Для того щоб застосувати їх практично Ви маєте зареєструватись!</p>
+    <p ng-if="!currentUser" class="alert-success welcome">Для того, щоб застосувати їх практично, Ви маєте зареєструватись!</p>
 </div>
