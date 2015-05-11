@@ -111,7 +111,6 @@ module.exports = function (app) {
   app.post('/signup', processSignup);
   app.get ('/signup_confirm/:token', signupConfirm);
   app.get ('/signup_confirm_success', redirectRoot);
-
   app.get ('/forgot_password', redirectRoot);
   app.post('/forgot_password', forgotPassword);
 
@@ -197,8 +196,10 @@ module.exports = function (app) {
 
 
   function processSignup(req, res) {
-    var md5 = requires('MD5');
-    var passwrd = md5(new Date().getDate());
+    if (currentUser && currentUser.isAdmin) {
+      var md5 = requires('MD5');
+      var passwrd = md5(new Date().getDate());
+    } else { passwrd = req.body.password; }
     var email = req.body.email,
       first_name = req.body.first_name,
       last_name = req.body.last_name,
@@ -224,7 +225,7 @@ module.exports = function (app) {
         return;
       }
       if (user == undefined) {
-        database.createInactiveAccount({email: email, first_name: first_name, last_name: last_name, initial_password: password}, function(err, acc) {
+        database.createInactiveAccount({email: email, first_name: first_name, last_name: last_name, initial_password: passwrd}, function(err, acc) {
           if (err) return errorRequest(res, SIGNUP_ERR_UNABLE_TO_CREATE_USER.replace('[ERROR]', err));
           var mailer = require('./../libs/mailer')(app)
             , protocol = "http://"
