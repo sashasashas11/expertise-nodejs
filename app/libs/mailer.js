@@ -24,8 +24,8 @@ global.gApp.mailer = global.gApp.mailer ||
   nodemailer.createTransport("SMTP",{
     service: "Gmail",
     auth: {
-      user: "expertiseua@gmail.com",
-      pass: "123qweasda"
+      user: "igor.zinchenko557@gmail.com",
+      pass: "14igor14"
     }
   });
 
