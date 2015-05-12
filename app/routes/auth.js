@@ -196,8 +196,9 @@ module.exports = function (app) {
 
 
   function processSignup(req, res) {
+    var currentUser = authDefender.getCurrentUser(req);
     if (currentUser && currentUser.isAdmin) {
-      var md5 = requires('MD5');
+      var md5 = require('MD5');
       var passwrd = md5(new Date().getDate());
     } else { passwrd = req.body.password; }
     var email = req.body.email,
