@@ -79,7 +79,7 @@ angular.module('Expertise').controller('expertiseController',
 
     $scope.expertiseModalWindow = function (expertise) {
 			$modal.open({
-				templateUrl: 'views/expertise_modal.html',
+				templateUrl: 'views/model_window/expertise_modal.html',
 				controller: 'ExpertiseModalCtrl',
 				resolve: {
 					expertiseList: function () { return $scope.expertise_list; },

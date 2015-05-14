@@ -61,7 +61,7 @@ angular.module('Expertise').
               $mdToast.hide();
             };
           },
-          templateUrl: 'views/toast-template.html',
+          templateUrl: 'views/model_window/toast-template.html',
           hideDelay: 5000,
           position: "top right"
         });
