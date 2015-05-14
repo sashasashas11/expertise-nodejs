@@ -22,6 +22,11 @@ angular.module('Expertise', [
             templateUrl: "views/welcome.html",
             controller: "welcomeController"
           })
+          .state('login', {
+            url: "/login",
+            templateUrl: "views/welcome.html",
+            controller: "welcomeController"
+          })
           .state('questionnaire', {
             url: "/questionnaire",
             templateUrl: "views/questionnaire.html",

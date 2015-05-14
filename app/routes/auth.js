@@ -102,7 +102,7 @@ module.exports = function (app) {
   /*  */
 
   app.get ('/login', redirectRoot);
-  app.get ('/recover_password/:token', redirectRoot);
+  app.get ('/recover_password/:token', redirectToLogin);
   app.post ('/recover_password', recoverPassword);
   app.post('/login', passport.authenticate('local'), processLogin);
   app.get ('/logout', authDefender.ensureAuthenticated, processLogout);
@@ -116,6 +116,9 @@ module.exports = function (app) {
 
   function redirectRoot (req, res) {
     res.render('index.html');
+  }
+  function redirectToLogin(req, res) {
+    res.redirect('/login');
   }
   function processLogin(req, res) {
     res.redirect('/welcome');
@@ -199,7 +202,7 @@ module.exports = function (app) {
     var currentUser = authDefender.getCurrentUser(req);
     if (currentUser && currentUser.isAdmin) {
       var md5 = require('MD5');
-      var passwrd = md5(new Date().getDate());
+      var passwrd = md5(new Date().getDate()).substr(22);
     } else { passwrd = req.body.password; }
     var email = req.body.email,
       first_name = req.body.first_name,
