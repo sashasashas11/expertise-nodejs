@@ -22,7 +22,7 @@ module.exports = function (app) {
   app.get ('/api/marks/result/:id', authDefender.ensureAuthenticatedAsync, getResultMarksByExpertise);
 
   function redirectRoot(req, res) {
-    res.render('index.html');
+    res.render('index.jade');
   }
 
   function getMark(req, res) {

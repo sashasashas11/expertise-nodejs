@@ -50,7 +50,8 @@ app.dbQuestionnaire = require('./db/models/questionnaireModel')(db);
 require('./passport.js')(app, passport);
 
 // configure Express web framework
-app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'jade');
+//app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/client');
 
 app.set('title', 'Expertise');
