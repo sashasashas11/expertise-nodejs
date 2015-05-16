@@ -1,0 +1,30 @@
+.wrapper-home
+    h1.title Експертне оцінювання
+    p.alert-info.welcome
+        | Вітаємо Вас на сайті проекту "Експертиза".
+        | Тут ви можете ознаймитись з існуючими методами розв’язку задач прийняття рішень та застосувати їх для себе.
+    tabset.methods(vertical='true', type='pills')
+        div(ng-repeat='method in methods')
+            div(ng-switch='', on="(method.children && method.children.length != 0)? 'notNull': 'null'")
+                span(ng-switch-when='notNull')
+                    accordion.methods(close-others='oneAtATime')
+                        accordion-group(is-open='status.open')
+                            accordion-heading
+                                | {{method.title}}
+                                i.pull-right.glyphicon(ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}")
+                            tab.custom-tab(heading='{{item.title}}', ng-repeat='item in method.children')
+                                div(ng-if='currentUser.isAdmin')
+                                    button.edit-btn(ng-hide='editText[$index]', ng-click='editText[$index] = true; tempText= item.text')   Редагувати
+                                    button.save-btn(ng-show='editText[$index]', ng-click='editText[$index] = false; updateMethod(item)')   Зберегти
+                                    button.cancel-btn(ng-show='editText[$index]', ng-click='editText[$index] = false; item.text=tempText')   Відміна
+                                div(ng-if='!editText[$index]', ng-bind-html='item.text')
+                                text-angular(ng-show='editText[$index]', ng-model='item.text')
+                span(ng-switch-when='null')
+                    tab.custom-tab(heading='{{method.title}}')
+                        div(ng-if='currentUser.isAdmin')
+                            button.edit-btn(ng-hide='editText[$index]', ng-click='editText[$index] = true; tempText= method.text')   Редагувати
+                            button.save-btn(ng-show='editText[$index]', ng-click='editText[$index] = false; updateMethod(method)')   Зберегти
+                            button.cancel-btn(ng-show='editText[$index]', ng-click='editText[$index] = false; method.text=tempText')   Відміна
+                        div(ng-if='!editText[$index]', ng-bind-html='method.text')
+                        text-angular(ng-show='editText[$index]', ng-model='method.text')
+    p.alert-success.welcome(ng-if='!currentUser') Для того, щоб застосувати їх практично, Ви маєте зареєструватись!

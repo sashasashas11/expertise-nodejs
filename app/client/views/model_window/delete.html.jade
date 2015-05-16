@@ -1,0 +1,8 @@
+.modal-header
+    h3.modal-title Видалити {{type}}
+    i.icon-remove(ng-click='cancel()')
+    .modal-body
+        .form-group
+            label Ви дійсно бажаєте видалити {{type + " " + item.name}} ?
+    .modal-footer
+        button.btn.btn-danger(ng-click='delete()') Видалити

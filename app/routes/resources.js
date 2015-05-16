@@ -6,6 +6,7 @@ module.exports = function (app) {
 
   var PERMISSION_DENIED = "Доступ заборонений";
 
+  app.get ('/', redirectRoot);
   app.get ('/welcome', redirectRoot);
   app.get ('/expertise', authDefender.ensureAuthenticated, redirectRoot);
   app.get ('/questionnaire', authDefender.ensureAuthenticated, redirectRoot);
@@ -20,6 +21,12 @@ module.exports = function (app) {
   app.post ('/api/marks', authDefender.ensureAuthenticatedAsync, createMark);
   app.get ('/api/marks/:id', authDefender.ensureAuthenticatedAsync, getMark);
   app.get ('/api/marks/result/:id', authDefender.ensureAuthenticatedAsync, getResultMarksByExpertise);
+
+
+  app.get('/views/*', function (req, res) {
+    var templateName = req.params[0];
+    res.render('views/' + templateName + '.jade');
+  });
 
   function redirectRoot(req, res) {
     res.render('index.jade');

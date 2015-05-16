@@ -1,0 +1,12 @@
+.col-md-3
+    .alert-info.welcome.no-expertise(ng-if='expertise_list.length == 0') На жаль вам не доступна ні одна експертиза
+    ul.list-group(ng-if='expertise_list.length != 0')
+        h2 Виберіть експертизу для оцінювання:
+        li.list-group-item.list-group-item-info.list-expertise(ng-repeat='item in expertise_list', ng-click='show(item)')
+            span.expertise-name {{item.name}}
+.col-md-9
+    tabset(ng-if='expertise')
+        tab(heading='Оцінювання')
+            ng-include(src="'views/tabs/evaluation.html'")
+        tab(heading='Результати', ng-click='result(expertise)')
+            ng-include(src="'views/tabs/result.html'")
